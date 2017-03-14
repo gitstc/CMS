@@ -1,0 +1,917 @@
+.km-root .km-pane .km-view .km-studentsIcon,
+.km-root .km-pane .km-view .km-alertIcon,
+.km-root .km-pane .km-view .km-chatIcon,
+.km-root .km-pane .km-view .km-stationeryIcon,
+.km-root .km-pane .km-view .km-playIcon{
+	background-size: 100% 100%;
+	-webkit-background-clip: border-box;
+	background-color: currentcolor;
+}
+	.km-alertIcon{
+	-webkit-mask-box-image: url("../images/icons/menu/white/participate.png");
+	background-color: red;		
+}
+.km-chatIcon{
+	-webkit-mask-box-image: url("../images/icons/menu/white/chat.png");
+	background-color: red;		
+}
+.km-stationeryIcon{
+	-webkit-mask-box-image: url("../images/icons/stationery.png");
+	background-color: red;		
+}
+
+.km-playIcon {
+    -webkit-mask-box-image: url("../images/icons/play.png");
+    background-color: red;
+}
+.eyeButton[status=on]:before
+{
+    color: firebrick;
+}
+
+.formButton
+{
+    background: #1E8BDE !important;
+    color: white !important;
+    font-size: 140%;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+.header
+{
+    display: table;
+    width: 100%;
+    min-height: 60px;
+    font-size: 140%;
+}
+.header .title,
+.header .date
+{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.footer
+{
+    display: block;
+    width: 100%;
+    height: 40px;
+    font-size: 140%;
+    font-weight: bold;
+    color: white;
+}
+.footer .currentSubjectContainer
+{
+    float: left;
+    text-align: left;
+    height: 100%;
+    padding: 0px 10px;
+}
+.km-root .km-pane .km-view .km-studentsIcon, .km-root .km-pane .km-view .km-alertIcon, .km-root .km-pane .km-view .km-chatIcon, .km-root .km-pane .km-view .km-stationeryIcon, .km-root .km-pane .km-view .km-playIcon {
+    background-size: 100% 100%;
+    -webkit-background-clip: border-box;
+    background-color: currentcolor;
+}
+.disabled{
+	opacity:0.2;
+	pointer-events:none;
+}
+/*============= Subjects View =============*/
+#subjectsContainer
+{
+    border-spacing: 15px;
+}
+#subjectsContainer .subject
+{
+    display: table-cell !important;
+    width: 33.3%;
+    background: white;
+    vertical-align: top;
+    padding: 0px !important;
+    margin: 0px;
+    border-radius: 10px;
+    text-align: left;
+    overflow: hidden !important;
+}
+#subjectsContainer .subject .km-text
+{
+    display: block !important;
+    overflow: hidden !important;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+#subjectsContainer .subject .subjectTitle
+{
+    height: 80px;
+    font-size: 140%;
+    font-weight: bold;
+    padding: 0px 5%;
+    background: lavender;
+}
+#subjectsContainer .subject .subjectDetails > div
+{
+    display: block;
+    width: 90%;
+    margin: 5%;
+}
+#subjectsContainer .subject .subjectSection
+{
+    min-height: 60px;
+    font-size: 120%;
+    font-weight: bold;
+}
+#subjectsContainer .subject .subjectTeacher
+{
+    height: 40px;
+    font-size: 100%;
+    font-weight: bold;
+}
+#subjectsContainer .subject .subjectTime
+{
+    height: 40px;
+    font-size: 100%;
+    font-weight: bold;
+}
+#subjectsContainer .subject.km-state-active
+{
+    background: lavender;
+    color: #333;
+}
+/*============= Subjects View =============*/
+
+/*============= Home View =============*/
+#homeView .mainLogo
+{
+    display: block;
+    width: 100%;
+    background-size: auto 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    -webkit-transition: opacity 0.5s ease;
+}
+/*============= Home View =============*/
+
+/*============= Profile View =============*/
+#profileView .form
+{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#profileView .formImage
+{
+    display: block;
+    width: 160px;
+    height: 160px;
+    border: 4px solid #1E8BDE;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0px auto 10px auto;
+}
+#profileView .formInput
+{
+    text-align: left;
+}
+/*============= Profile View =============*/
+
+/*============= Scribble Details View =============*/
+#scribbleCanvasContainer
+{
+    display: block;
+    width: 80%;
+    height: 100%;
+    float: left;
+    background-color: #222;
+}
+#scribbleCanvas
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    -webkit-transition: opacity 0.2s ease;
+}
+#scribbleCanvasContainer .scribbleActions
+{
+    display: block;
+    width: 100%;
+    height: 80px;
+    background: #333;
+    float: left;
+}
+#scribbleCanvasContainer .scribbleActions .action
+{
+    display: block;
+    width: 50%;
+    min-width: 160px;
+    height: 60px;
+    margin: 10px auto;
+    background: #1E8BDE;
+    color: white;
+    font-size: 160%;
+    font-weight: bold;
+}
+.drawingTools
+{
+    display: block;
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+.drawingToolsList .drawingTool
+{
+    display: block;
+    width: 100%;
+    background: white;
+    position: relative;
+}
+.drawingToolsList .drawingTool:before
+{
+    display: block;
+    width: 8px;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0px;
+    background: firebrick;
+    opacity: 0;
+    content: "";
+    transition: opacity 0.1s ease;
+    -webkit-transition: opacity 0.1s ease;
+}
+.drawingToolsList .drawingTool.active:before
+{
+    opacity: 1;
+}
+.drawingToolsList .drawingTool:after
+{
+    display: block;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    -webkit-mask-size: auto 80%;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-image: url(../images/icons/pencilIcon.png);
+    background: currentColor;
+    content: "";
+}
+.drawingToolsList .drawingTool[color=eraser]:after
+{
+    -webkit-mask-image: url(../images/icons/eraserIcon.png);
+}
+.drawingActions
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    background: firebrick;
+}
+.drawingActions .action
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: 0px;
+    color: white;
+    background: inherit;
+    font-size: 140%;
+}
+
+#scribbleResultModal .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+}
+/*============= Scribble Details View =============*/
+
+/*============= Broadcast View =============*/
+#broadcastCanvasContainer
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    float: left;
+}
+#broadcastCanvas
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    -webkit-transition: opacity 0.2s ease;
+}
+/*============= Broadcast View =============*/
+
+/*============= Polls View =============*/
+#pollsView .pollQuestion
+{
+    width: 94%;
+    height: 80px;
+    margin: 10px auto;
+    color: #333;
+    font-size: 180%;
+}
+#pollsView #pollAnswersList
+{
+    width: 90%;
+    margin: 0px auto;
+}
+#pollsView #pollAnswersList li
+{
+    height: 110px;
+    border-bottom: 1px solid #1E8BDE;
+    margin-top: 10px;
+}
+#pollsView #pollAnswersList .container
+{
+    display: block;
+    width: 100%;
+    height: 100px;
+    position: relative;
+}
+#pollsView #pollAnswersList .choiceImageContainer
+{
+    display: block;
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+#pollsView #pollAnswersList .choiceImage
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#pollsView #pollAnswersList .choiceContainer
+{
+    display: block;
+    width: auto;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 110px;
+    right: 90px;
+    overflow: hidden;
+}
+#pollsView #pollAnswersList .choiceContainer .choice
+{
+    width: 100%;
+    height: 100%;
+    color: #333;
+    font-size: 140%;
+}
+#pollsView #pollAnswersList .choiceCheckboxContainer
+{
+    display: block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    overflow: hidden;
+}
+#pollsView #pollAnswersList .choiceCheckboxContainer .choiceCheckbox
+{
+    display: block;
+    width: 70%;
+    height: 70%;
+    border: 2px solid #AAA;
+    border-radius: 100%;
+    margin: 15%;
+    transition: background 0.1s ease, border-color 0.1s ease;
+    -webkit-transition: background 0.1s ease, border-color 0.1s ease;
+}
+#pollsView #pollAnswersList .choiceCheckboxContainer .choiceCheckbox:after
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-image: url(../images/icons/checkIcon.png);
+    -webkit-mask-size: 60%;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    background: currentColor;
+    color: #AAA;
+    content: "";
+}
+#pollsView #pollAnswersList li.selected .choiceCheckboxContainer .choiceCheckbox
+{
+    border-color: #1E8BDE;
+    background: #1E8BDE;
+}
+#pollsView #pollAnswersList .choiceCheckboxContainer .choiceCheckbox:after
+{
+    color: white;
+}
+
+/*============= Polls View =============*/
+
+/*============= Menu Options View =============*/
+#menuOptionsView ol.km-pages
+{
+    display: none;
+}
+#menuOptionsView .content
+{
+    display: block;
+    width: 100%;
+    float: left;
+}
+/*============= Menu Options View =============*/
+
+/*============= Side Menu =============*/
+.km-listview.sideMenu li
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #1E8BDE !important;
+    color: #333;
+    margin: 0px;
+    font-size: 120%;
+}
+.km-listview.sideMenu li .km-listview-link
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    padding: 0px 10px;
+    margin: 0px;
+}
+/*============= Side Menu =============*/
+
+/*============= Eyes On Teacher Modal =============*/
+#eyesOnTeacherModal,
+#eyesOnTeacherModal .km-content
+{
+    background: indianred;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#eyesOnTeacherModal #eotMessage
+{
+    width: 100%;
+    height: 300px;
+    font-size: 200%;
+    font-weight: bold;
+    color: white;
+}
+/*============= Eyes On Teacher Modal =============*/
+
+/*============= Image Modal =============*/
+#imageModal .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+}
+/*============= Image Modal =============*/
+
+/*============= Whats New View =============*/
+#whatsNewList li
+{
+    padding: 0px;
+    border-bottom: 1px solid #AAA;
+}
+#whatsNewList .container
+{
+    display: table;
+    width: 100%;
+    height: 80px;
+    padding: 0px 2%;
+    margin: 0px;
+    font-size: 120%;
+    padding-right: 5%;
+}
+#whatsNewList .container .title
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+#whatsNewList .container .date
+{
+    display: table-cell;
+    width: 20%;
+    vertical-align: middle;
+    text-align: right;
+    margin-right: 5%;
+}
+/*============= Whats New View =============*/
+/*============= Whats New Details View =============*/
+#whatsNewDetailsView .header .title
+{
+    padding: 0px 5%;
+    padding-left: 25%;
+    font-weight: bold;
+    font-size: 150%;
+}
+#whatsNewDetailsView .header .date
+{
+    width: 20%;
+}
+#whatsNewDetailsView .message
+{
+    display: block;
+    margin: 20px;
+    font-size: 120%;
+}
+/*============= Whats New Details View =============*/
+/*============= Presentations View =============*/
+#presentationDetailsView #mainSlidesScroller
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#presentationDetailsView #mainSlidesScroller .km-virtual-page
+{
+    top: 5px;
+    bottom: 5px;
+}
+#presentationDetailsView #mainSlidesScroller .container
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#presentationDetailsView #mainSlidesScroller .slide
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+/*============= Presentations View =============*/
+/*============= ReadyExam View =============*/
+#examReadyView h1 {
+    display: block;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-top: 20%;
+}
+#examReadyBtn, #examReviewBtn, #backToExamReadyBtn, #backToExamBtn, #confirmSubmitExamBtn {
+    display: block;
+    width: 30%;
+    height: 80px;
+    line-height: 80px;
+    color: white;
+    background: #1E8BDE;
+    font-size: 2rem;
+    margin-top: 10%;
+    box-shadow: 0px 0px 5px #000;
+    text-shadow: 1px 1px 3px #000;
+    border-radius: 10px;
+}
+#examDetailsHeader {
+    display: block;
+    width: 100%;
+    height: 50px;
+    position: relative;
+}
+#examTimer {
+    display: block;
+    position: absolute;
+    width: 340px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.5rem;
+    top: 5px;
+    left: 20px;
+}
+#examQuestionCounter {
+    display: block;
+    width: 40%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 2rem;
+    position: absolute;
+    text-align: center;
+    top: 5px;
+    left: 30%;
+}
+#examContent {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+#examContent li:first-child {
+    margin-bottom: 10px;
+}
+.questionImage {
+    float: right;
+    height: 150px;
+}
+#examContent li:nth-of-type(3) {
+    border-top: 1px solid #b1b3b8;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+#examContent li:not(:first-child) {
+    padding: 0px 10px;
+    margin: 0px;
+}
+#examContent .answer .questionAnswer {
+    display: inline-block;
+    width: -webkit-calc(100% - 100px);
+    min-height: 40px;
+    line-height: 40px;
+    float: left;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#examContent .answer .questionAnswerImage {
+    display: inline-block;
+    float: right;
+    width: 100px;
+    height: 94px;
+    margin-top: 3px;
+    background-color: transparent;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.km-listview li.activeLink {
+    background-image: -webkit-linear-gradient(top, rgba(70,139,238,1) 50%,rgba(2,96,232,1) 100%);
+    color: #FFF;
+}
+.km-ios6 .km-view .km-content .km-button {
+    background: -webkit-linear-gradient(top, #414141 0%,#404040 16%,#191919 100%);
+}
+
+.km-ios .km-view .km-content .km-button {
+    background: -webkit-linear-gradient(top, #414141 0%,#404040 16%,#191919 100%);
+}
+
+.km-ios6 *:not(.km-tabstrip):not(.km-buttongroup)>.km-button {
+    background-color: #44648f;
+}
+.pollsBtn {
+    display: block;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 2rem;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}
+#submitExamWarning {
+    display: block;
+    width: 90%;
+    margin: 10% auto;
+    font-size: 250%;
+    color: orange;
+    text-align: center;
+}
+#examQuestionsContainer .rv_question {
+    width: 100%;
+    margin: 2px 0px;
+    background: #CCC;
+}
+#examQuestionsContainer .rv_question .title {
+    width: 75%;
+    height: 120px;
+    padding: 0px 10px;
+}
+#examQuestionsContainer .rv_question .image {
+    width: 25%;
+    height: 120px;
+    background-image: url(../Images/default.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#examQuestionsContainer .rv_question_answers {
+    width: 100%;
+    background: #EEE;
+}
+#examQuestionsContainer .rv_question_answers .title {
+    width: 75%;
+    height: 80px;
+    padding: 0px 30px;
+}
+#examQuestionsContainer .rv_question_answers .image {
+    width: 25%;
+    height: 80px;
+    background-image: url(../Images/default.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#examResultDetailsTable {
+    width: 98%;
+    margin: 10px 1%;
+    border-spacing: 0px;
+}
+#examResultDetailsTable tr {
+    min-height: 90px;
+    border-color: black;
+}
+#examResultDetailsTable thead tr th {
+    text-align: center;
+}
+#examResultDetailsTable tbody {
+    border: 2px solid #000;
+}
+#examResultDetailsTable tr td:not(:nth-of-type(2)) {
+    padding: 0px 5px;
+}
+#examResultDetailsTable tr td:nth-of-type(1) {
+    text-align: center;
+}
+#examResultDetailsTable tr td {
+    min-height: 90px;
+    font-size: 1.2rem;
+    box-shadow: inset 0px 0px 1px #000;
+}
+/*============= ReadyExam View =============*/
+/*============= documents View =============*/
+#documents-list li:not(.catHeader) {
+    display: inline-block;
+    width: calc((100% / 4) - 40px);
+    width: -webkit-calc((100% / 4) - 40px);
+    width: 22.5%;
+    /* width: 200px; */
+    height: 300px;
+    margin: 1.25%;
+    float: left;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: none;
+    padding: 0px;
+    background: #f0f0f0;
+}
+.progressBarContainer {
+    display: block;
+    width: 100%;
+    height: 30px;
+    background: lightblue;
+    opacity: 0;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.progressBar {
+    display: block;
+    width: 0px;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    background: #666;
+    z-index: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.progressBarContainer .progressLabel {
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, -1px 1px 0px #000, 1px -1px 0px #000;
+}
+.iconContainer {
+    display: block;
+    width: 100%;
+    height: calc(100% - 70px);
+    height: -webkit-calc(100% - 70px);
+    height: 80%;
+    background-color: white;
+    background-image: url(images/icons/pdf.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.iconContainer .loader {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    background-image: url(../images/icons/loading.gif);
+    background-size: 80% 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    position: absolute;
+    top: calc((100% - 50px) / 2);
+    top: -webkit-calc((100% - 50px) / 2);
+    top: 40%;
+    left: calc((100% - 50px) / 2);
+    left: -webkit-calc((100% - 50px) / 2);
+    left: 40%;
+    box-shadow: 0px 0px 5px #000;
+    visibility: hidden;
+}
+.iconContainer .cancelDownload {
+    display: block;
+    width: 25px;
+    height: 25px;
+    line-height: 16px;
+    font-size: 1.3em;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    background: white;
+    color: black;
+    border-radius: 25px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    opacity: 0;
+}
+.iconContainer .downloadComplete {
+    display: block;
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+    background-image: url(../images/icons/checkMark.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    opacity: 0;
+}
+.documentInfoContainer {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background: #333;
+    box-shadow: inset 0px 1px 1px #CCC;
+    color: white;
+}
+.documentInfo {
+    font-size: 1rem;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.documentInfo {
+    font-size: 1rem;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/*============= documents View =============*/

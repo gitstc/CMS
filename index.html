@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
+        
+        <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet">
+
+        <link href="styles/default.css" rel="stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
+
+        <script src="cordova.js"></script>
+        <script src="scripts/libs/NativePageTransitionsKendoAdapter.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
+    </head>
+
+    <body>
+        <div data-role="view" id="loginView" data-title="Login View">
+            <a data-role="button" id="updateAppButton" onclick="checkForUpdates(event)"><span class="small">v.<span class="appVersion"></span></span></a>
+            <div id="loginContainer">
+                <div id="loginForm" class="form">
+                    <input type="text" id="txtUsername" autocorrect="off" autocomplete="off" autocapitalize="off" class="formInput flex" value="raw.almasri" placeholder="Username" />
+                    <input type="password" id="txtPassword" autocorrect="off" autocomplete="off" autocapitalize="off" class="formInput flex" value="1234" placeholder="Password" />
+                    <div class="formButtons">
+                        <a data-role="button" id="loginButton" class="formButton" onclick="loginClicked(event)">Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--============================ LOADING MODAL ============================-->
+        <div data-role="modalview" id="progressModal" style="width:400px;height:100px;">
+            <div class="progressBarContainer">
+                <div class="progressBar"></div>
+            </div>
+            <div class="progressMessage">Downloading Update...</div>
+        </div>
+        <!--============================ /LOADING MODAL ============================-->
+        <script src="scripts/libs/fastclick.js"></script>
+        <script src="scripts/Utils.js"></script>
+        <script src="scripts/DB.js"></script>
+        <script src="scripts/WebService.js"></script>
+        <script src="scripts/index.js"></script>
+        <!-- HELPING LIBRARIES -->
+        <script src="scripts/libs/KeyboardFix.js"></script>
+        <div id="settingsButton"></div>
+    </body>
+
+</html>

@@ -1,0 +1,50 @@
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="org.stc.applicationPreferences"
+    version="0.4.1">
+
+    <name>ApplicationPreferences</name>
+
+    <engines>
+        <engine name="cordova" version=">=2.7.0" />
+    </engines>
+
+    <js-module src="www/applicationPreferences.js" name="applicationPreferences">
+        <clobbers target="ApplicationPreferencesPlugin" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            
+            <feature name="applicationPreferences">
+                <param name="ios-package" value="applicationPreferences"/>
+                <param name="onload" value="true" />
+            </feature>
+            
+            <plugin name="applicationPreferences" value="applicationPreferences" />
+        </config-file>
+
+        <header-file src="src/ios/applicationPreferences.h" />
+        <source-file src="src/ios/applicationPreferences.m" compiler-flags="-fno-objc-arc" />
+        <resource-file src="Settings.bundle" />
+    </platform>
+
+    <!-- android -->
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            
+            <feature name="applicationPreferences" >
+                <param name="android-package" value="org.stc.applicationPreferences.applicationPreferences"/>
+            </feature>
+            
+            <plugin name="applicationPreferences" value="org.stc.applicationPreferences.applicationPreferences" />
+        </config-file>
+        
+        <source-file src="src/android/applicationPreferences.java" 
+            target-dir="src/org/stc/applicationPreferences" />
+
+    </platform>
+   
+</plugin>

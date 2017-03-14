@@ -1,0 +1,52 @@
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="org.stc.FBScreenshot"
+    version="0.4.1">
+
+    <name>FBScreenshot</name>
+
+    <engines>
+        <engine name="cordova" version=">=2.7.0" />
+    </engines>
+
+    <js-module src="www/FBScreenshot.js" name="FBScreenshot">
+        <clobbers target="window.plugins.FBScreenshot" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            
+            <feature name="FBScreenshot">
+                <param name="ios-package" value="FBScreenshot"/>
+                <param name="onload" value="true" />
+            </feature>
+            
+            <plugin name="FBScreenshot" value="FBScreenshot" />
+        </config-file>
+
+        <header-file src="src/ios/FBScreenshot.h" />
+
+        <source-file src="src/ios/FBScreenshot.m" compiler-flags="-fno-objc-arc" />
+    
+        <framework src="QuartzCore/QuartzCore.h" />
+    </platform>
+
+    <!-- android -->
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            
+            <feature name="FBScreenshot" >
+                <param name="android-package" value="org.stc.FBScreenshot.FBScreenshot"/>
+            </feature>
+            
+            <plugin name="FBScreenshot" value="org.stc.FBScreenshot.FBScreenshot" />
+        </config-file>
+        
+        <source-file src="src/android/FBScreenshot.java" 
+            target-dir="src/org/stc/FBScreenshot" />
+
+    </platform>
+   
+</plugin>

@@ -1,0 +1,193 @@
+body {
+    overflow: hidden;
+}
+
+.km-view, .km-content
+{
+    background-color: white;
+}
+.km-header
+{
+    height: 50px;
+    margin: 0px !important;
+    border-radius: 0px !important;
+}
+.km-header .km-navbar
+{
+    display: table;
+    height: inherit;
+    background: inherit;
+    color: inherit;
+    border: 0px !important;
+}
+.km-header .km-navbar .km-leftitem
+{
+    left: 0px;
+}
+.km-header .km-navbar .km-rightitem
+{
+    right: 0px;
+}
+.km-header .km-navbar .km-button
+{
+    min-width: 50px;
+    height: 50px;
+    margin: 0px !important;
+    border: none;
+    border-radius: 0px;
+    color: inherit;
+    background-color: inherit;
+}
+.km-view:not(.km-modalview) .km-header .km-navbar .km-button:before {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    content: "";
+    float: left;
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    background: currentColor;
+    pointer-events: none;
+}
+.km-header .km-navbar .km-button .km-text {
+    font-size: 120%;
+}
+.km-header .km-navbar .km-leftitem .km-button
+{
+    float: left;
+    border-right: 1px solid #EEE;
+}
+.km-header .km-navbar .km-rightitem .km-button
+{
+    float: right;
+    border-left: 1px solid #EEE;
+}
+.km-header .km-view-title
+{
+    display: table;
+    height: inherit;
+    color: inherit;
+}
+.km-header .km-view-title [data-role=view-title]
+{
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 120%;
+    font-weight: bold;
+}
+.km-button
+{
+    display: table !important;
+    padding: 0px 10px !important;
+}
+.km-button.hidden
+{
+    display: none !important;
+}
+.km-buttongroup>.km-button
+{
+    display: table-cell !important;
+    padding: 0.8em 2em !important;
+}
+.km-button.km-state-active
+{
+    transition: transform 0.05s ease;
+    -webkit-transition: -webkit-transform 0.05s ease;
+    filter: brightness(50%);
+    -webkit-filter: brightness(50%);
+}
+.km-buttongroup>.km-button.km-state-active
+{
+    filter: brightness(100%);
+    -webkit-filter: brightness(100%);
+}
+.km-button .km-text
+{
+    display: table-cell !important;
+    vertical-align: middle !important;
+}
+.km-listview li
+{
+    padding: 0px;
+}
+
+.km-popup.km-pane
+{
+    min-height: 0px !important;
+}
+
+input
+{
+    display: block;
+    height: 40px;
+    line-height: 32px;
+    padding: 4px 10px;
+    -webkit-appearance: none;
+    border: 1px solid #666;
+    border-radius: 0px;
+    background: white;
+    font-size: 120%;
+}
+textarea
+{
+    display: block;
+    padding: 4px 10px;
+    -webkit-appearance: none;
+    border: 1px solid #666;
+    border-radius: 0px;
+    resize: none;
+    background: white;
+    font-size: 120%;
+}
+
+.flex {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+.flex-inline {
+    display: -webkit-inline-box !important;
+    display: -webkit-inline-flex !important;
+    display: -moz-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+}
+.flex, .flex-inline {
+    -webkit-box-align: center !important;
+    -webkit-align-items: center !important;
+    -moz-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    line-height: initial !important;
+}
+.flex.center, .flex-inline.center {
+    -webkit-box-pack: center !important;
+    -webkit-justify-content: center !important;
+    -moz-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    line-height: initial !important;
+}
+
+.sideMenu li
+{
+    display: table;
+    width: 100%;
+    height: 50px;
+}
+.sideMenu li .km-listview-link
+{
+    display: table-cell;
+    width: 90%;
+    height: 100%;
+    padding: 0px 5%;
+    vertical-align: middle;
+}
+.sideMenu li .km-listview-link:after
+{
+    display: none;
+}

@@ -1,0 +1,67 @@
+{
+  "ProjectName": "CMS Islamic School",
+  "ProjectGuid": "1ba71f6c-ca63-4903-bf2b-9fd62812efa6",
+  "projectVersion": 1,
+  "AppIdentifier": "com.stc.CMSIslamicShool",
+  "DisplayName": "Classroom Management System",
+  "Author": "The Solutions Unit",
+  "Description": "Classroom Management System",
+  "BundleVersion": "1.1",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "4.0.0",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "true",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [
+    "ID_CAP_NETWORKING",
+    "ID_CAP_WEBBROWSERCOMPONENT"
+  ],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{80546b58-4ad3-4ad3-803d-754ddc254510}",
+  "WP8ProductID": "{1779c420-6063-429f-b9ab-ba5813aa43f7}",
+  "WPSdk": "8.0",
+  "WP8PackageIdentityName": "1234Telerik.CMSIslamicSchool",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ],
+  "iOSDeploymentTarget": "6.0",
+  "CorePlugins": [
+    "com.ionic.keyboard@2.0.1",
+    "com.phonegap.plugins.sqlite@1.1.0",
+    "com.telerik.plugins.nativepagetransitions@0.6.5",
+    "cordova-plugin-camera",
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-dialogs",
+    "cordova-plugin-file",
+    "cordova-plugin-file-opener2@2.0.2",
+    "cordova-plugin-file-transfer",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-ios-longpress-fix@1.1.0",
+    "cordova-plugin-media",
+    "cordova-plugin-media-capture",
+    "cordova-plugin-network-information",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-whitelist",
+    "nl.x-services.plugins.actionsheet@2.3.1",
+    "nl.x-services.plugins.insomnia@4.0.1",
+    "uk.co.whiteoctober.cordova.appversion@0.1.7"
+  ]
+}

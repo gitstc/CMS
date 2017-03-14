@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
+        
+        <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet">
+
+        <link href="styles/default.css" rel="stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
+        <link href="styles/student.css" rel="stylesheet">
+
+        <script src="cordova.js"></script>
+        <script src="scripts/libs/NativePageTransitionsKendoAdapter.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
+        
+        <script src="scripts/hammer/hammer.js"></script>
+        <script src="scripts/hammer/jquery.hammer.js"></script>
+        <script src="scripts/hammer/jquery.specialevent.hammer.js"></script>
+    </head>
+
+    <body>
+        <div id="notification-bar">
+            <div class="message flex center"></div>
+        </div>
+        <div data-role="drawer" id="drawer" data-swipe-to-open="false">
+            <div data-role="header">
+                <div data-role="navbar"></div>
+            </div>
+            <ul data-role="listview" class="sideMenu">
+                <li>
+                    <a data-role="button" class="flex" onclick="Utils.navigate('#whatsNewView')">What's New</a>
+                </li>
+                <li>
+                    <a data-role="button" class="flex">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <!------------------------------------------------------------->
+        <!--------------------------- SUBJECTS ------------------------>
+        <!------------------------------------------------------------->
+        <div data-role="view" id="subjectsView" data-title="Subjects" data-init="initSubjectsView">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <div data-role="content">
+                <table id="subjectsContainer"></table>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!----------------------------- HOME -------------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="homeView" data-title="Home" data-layout="mainLayout" data-init="initHomeView">
+            <div data-role="content">
+                <div class="mainLogo"></div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!---------------------------- PROFILE ------------------------>
+        <!------------------------------------------------------------->
+        <div data-role="view" id="profileView" data-title="My Profile" data-layout="detailsLayout" data-init="initProfileView">
+            <div data-role="content">
+                <div class="form">
+                    <div class="formImage" id="stdPicture"></div>
+                    <div class="formInput">Name:&nbsp;<span id="stdName"></span></div>
+                    <div class="formInput">Level:&nbsp;<span id="stdLevel"></span></div>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!--------------------------- SCRIBBLE ------------------------>
+        <!------------------------------------------------------------->
+        <div data-role="view" id="scribbleView" data-title="Scribble" data-layout="detailsLayout" data-init="initScribbleView" data-show="showScribbleView">
+            <div data-role="content">
+                <div id="scribbleCanvasContainer">
+                    <canvas id="scribbleCanvas"></canvas>
+                    <div class="scribbleActions">
+                        <a data-role="button" class="action" onclick="submitScribble(event)">Submit Scribble</a>
+                    </div>
+                </div>
+                <div class="drawingTools">
+                    <div class="drawingToolsContainer">
+                        <ul data-role="listview" class="drawingToolsList">
+                            <li class="drawingTool" color="eraser"></li>
+                            <li class="drawingTool active" color="black"></li>
+                            <li class="drawingTool" color="red"></li>
+                            <li class="drawingTool" color="lime"></li>
+                            <li class="drawingTool" color="lightblue"></li>
+                            <li class="drawingTool" color="yellow"></li>
+                            <li class="drawingTool" color="pink"></li>
+                            <li class="drawingTool" color="purple"></li>
+                        </ul>
+                    </div>
+                    <div class="drawingActions">
+                        <a data-role="button" class="action" onclick="clearScribble(event)">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!----------------------- SCREEN BROADCAST -------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="broadcastView" data-title="Screen Broadcast" data-layout="detailsLayout" data-init="initBroadcastView" data-show="showBroadcastView">
+            <div data-role="content">
+                <div id="broadcastCanvasContainer">
+                    <canvas id="broadcastCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!----------------------------- POLLS ------------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="pollsView" data-title="Polls" data-layout="detailsLayout" data-init="initPollsView" data-show="showPollsView">
+            <div data-role="content">
+                <div class="pollQuestion flex center"></div>
+                <div class="content">
+                    <ul data-role="listview" id="pollAnswersList" data-source="pollAnswersDS" data-template="pollAnswersTemplate" data-bound="pollAnswersListBound" data-auto-bind="false"></ul>
+                </div>
+                <div class="bottomActions">
+                    <a data-role="button" id="btnSubmitPoll" class="action" onclick="onclickSubmitPoll(event)">Submit Poll</a>
+                </div>
+            </div>
+            <script id="pollAnswersTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div id="choiceID" class="hidden">#:ID#</div>
+                    <div class="choiceImageContainer">
+                        <div class="choiceImage" background-image="#=Utils.getPicturePath(ChoiceImage)#" onclick="viewPicture(event, '#=Utils.getPicturePath(ChoiceImage)#', 'Poll Image')"></div>
+                    </div>
+                    <div class="choiceContainer">
+                        <div class="choice flex">#:Choice#</div>
+                    </div>
+                    <div class="choiceCheckboxContainer" onclick="selectPollAnswer(event, #:ID#)">
+                        <div class="choiceCheckbox"></div>
+                    </div>
+                </div>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!----------------------- WHATS NEW --------------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="whatsNewView" data-layout="mainLayout" data-title="What's New" data-init="initWhatsNewView" data-show="showWhatsNewView">
+            <div data-role="content">
+                <ul data-role="listview" id="whatsNewList" data-source="whatsNewDS" data-template="whatsNewTemplate"></ul>
+            </div>
+            <script id="whatsNewTemplate" type="text/x-kendo-template">
+                <a class="container" onclick="Utils.navigate('\#whatsNewDetailsView?id=#:ID#', 'slide:left')">
+                    <span class="title">#=Title#</span>
+                    <span class="date">#=Date#</span>
+                </a>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!--------------------- WHATS NEW DETAILS --------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="whatsNewDetailsView" data-layout="detailsLayout" data-title="What's New" data-init="initWhatsNewDetailsView" data-show="showWhatsNewDetailsView">
+            <div data-role="content">
+                <div class="header">
+                    <span class="title"></span>
+                    <span class="date"></span>
+                </div>
+                <div class="content">
+                    <span class="message"></span>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!------------------------ PRESENTATION ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="presentationDetailsView" data-layout="detailsLayout" data-title="Presentation" data-init="initPresentationsView" data-show="showPresentationsView">
+            <div data-role="content">
+                <div class="header">
+                    <div class="headerItem title">
+                        <div class="value"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div id="mainSlidesScroller"></div>
+                </div>
+            </div>
+            <script id="presentationSlidesTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <canvas class="slide" style="background-image:url(#=Utils.getPicturePath(SlideContent)#)"></canvas>
+                </div>
+            </script>
+            <script id="slidesTemplate" type="text/x-kendo-template">
+            # var slideContent; #
+            # if (isLocal) { #
+                  # slideContent = getFullPath(SlideContent); #
+            # } else { #
+                  # slideContent = encodeURI(SlideContent); #
+            # } #
+            
+            # if(SlideType === 1) { #
+                <img src='#:getSlideContent(SlideContent)#' class='sharedContent'/>
+            # } else if(SlideType === 2) { #
+                <img src='images/thumbnails/pdf.png' onclick='viewPDF(this)' source='" + getSlideContent(# slideContent #) + "' class='sharedContent'/>
+            # } else if(SlideType === 3) { #
+                # if(isLocal.toString() === "true") { #
+                    <video controls class='sharedContent'><source src='" + # slideContent # + "' type='video/mp4' /></video>
+                # } else { #
+                    <iframe controls class='youtube-player sharedContent' type='text/html' frameborder='0' src='" + #:SlideContent# + "'></iframe>
+                # } #
+            # } else if(SlideType === 4) { #
+                <canvas class='sharedContent' style='background:url(" + #slideContent# + ");background-size:100%;background-repeat:no-repeat;'></canvas>
+            # } else if(SlideType === 5) { #
+                <span class='sharedContent' style='font-size:2rem;white-space: pre-wrap;word-wrap:break-word' >" + #:SlideContent# + "</span>
+            # } else if(SlideType === 6) { #
+                # function htmlDecode(value) { #
+                      # return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">"); #
+                # } #
+                # try { #
+                    # var regEX = new RegExp("url\\(", "g"); #
+                    # var regEXImages = new RegExp("src=\"", "g"); #
+                    # var regContent = SlideContent.replace(regEX, "url(" + mainURL + "/").replace(regEXImages, "src=\"" + mainURL + "/") #
+                    # var div = document.createElement("div"); #
+                    # div.innerHTML = regContent #
+                    # $(div).find("iframe").each(function() { #
+                    #     $(this).attr("src", $(this).attr("src").replace(mainURL + "/", "")); #
+                    #     $(this).attr("width",parseFloat($(this).closest(".videodiv").css("width").split("px")[0])).attr("height",parseFloat($(this).closest(".videodiv").css("height").split("px")[0])); #
+                    # }); #
+                    #= $(div).html() #
+                # } catch(e) { #
+                    #:SlideContent#
+                # } #
+            # } #
+        </script>
+        </div>
+       
+        <!---------------------------------------------->
+        <!------------------Exams----------------------->
+        <!---------------------------------------------->
+         <div data-role="view" id="examReadyView" data-show="getExamID" data-title="EXAM" data-layout="mainLayout">
+                    <center>
+                        <h1 dyn-title="std_exam_ready">Ready to take the exam?</h1>
+                        <a data-role="button" id="examReadyBtn" onclick="takeExam(event)">Ready!</a>
+                        <a data-role="button" id="examReviewBtn" style="margin-top:5%" onclick="reviewExam(event)">Review Exam</a>
+                    </center>
+          </div>
+        <div data-role="view" id="examDetails" data-show="getExamDetails" data-hide="endExam" data-title="EXAM" data-layout="mainLayout">
+                    <div data-role="content">
+                        <div id="examDetailsHeader">
+                            <div id="examTimer"></div>
+                            <div id="examQuestionCounter"></div>
+                        </div>
+                        <a id="prevQuestionBtn" data-role="button" onclick="getPrevQuestion()" style="float:left;margin-left:10px;margin-top:10px;width:4rem;height:3rem;line-height:3rem;font-size:1.6rem" dyn-title="std_exam_prev">Prev</a>
+                        <a id="nextQuestionBtn" data-role="button" onclick="getNextQuestion()" style="float:right;margin-right:10px;margin-top:10px;width:4rem;height:3rem;line-height:3rem;font-size:1.6rem" dyn-title="std_exam_next">Next</a>
+                        <ul data-role="listview" data-style="inset" id="examQuestionsListHeader" style="clear:both">
+                        </ul>
+                        <ul data-role="listview" data-style="inset" id="examContent">
+                            <li></li>
+                        </ul>
+                        <a data-role="button" data-target="content-pane" class="pollsBtn" id="submitExamBtn" onclick="submitExam()" style="display:none" dyn-title="std_exam_submit" data-icon="playIcon"></a>
+                    </div>				
+        </div>
+        <div data-role="view" id="examReview" data-show="getExamReviewQuestions" data-title="REVIEW" data-layout="mainLayout">
+                    <div data-role="content">
+                        <div id="examQuestionsContainer"></div>
+                    </div>
+                    <a data-role="button" id="backToExamReadyBtn" onClick="Utils.navigate('#examReadyView')" data-transition="none" style="margin-top:0%;margin:2% auto">Done</a>
+         </div>
+        <div data-role="view" id="submitExamView" data-title="SUBMIT EXAM" data-layout="mainLayout">
+                    <div data-role="content">
+                        <div id="submitExamWarning">
+                            Submitting your exam will save your result permanently and you will not be able to change your answers!
+                            <br/>
+                            <br/>
+                            <br/>
+                            Are you sure you want to continue?
+                        </div>
+                    </div>
+                    <a data-role="button" id="backToExamBtn" onClick="Utils.navigate('#examDetails?prevent=true')" data-transition="none" style="margin-top:0%;margin:2% auto">Back to Exam</a>
+                    <a data-role="button" id="confirmSubmitExamBtn" data-click="confirmSubmitExam" style="margin-top:0%;margin:2% auto; background: red">Submit Exam</a>
+        </div>
+        
+        <div data-role="view" id="examResultsChartView" data-stretch="true" data-title="RESULTS">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title">RESULTS</span>
+                        </div>
+                    </div>
+                    <div data-role="content">
+                        <div id="examBasicInfo" style="display:block;width:100%;position:absolute;top:5%;left:0%;text-align:center;"></div>
+                        <div id="examResultsChart"></div>
+                    </div>
+                    <div data-role="footer" style="background:transparent">
+                        <div data-role="navbar" style="background:transparent">
+                            <a data-role="button" data-align="right" onclick="viewExamResultDetails(event)" style="width:100px;height:30px;line-height:30px;margin:0px;padding:0px;background:-webkit-linear-gradient(top, #515151 0%,#505050 16%,#292929 100%);font-size:1.2rem;color:white;float: left;">Details</a>
+                        </div>
+                    </div>
+        </div>
+        <div data-role="modalview" id="imageViewerModal" style="width:800px;height:600px">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <a onclick="Utils.closeModal(event)" data-align="left" data-role="button">Back</a>
+                            <span data-role="view-title">Image</span>
+                            <a data-role="button" data-align="right" data-icon="stationeryIcon"  onClick="Utils.openPopover('#toolsPopover', $(event.target))" data-rel="popover" style="display:block !important"></a>
+                        </div>
+                    </div>
+                    <div data-role="content" style="position:relative;">
+                        <img id="tool" style="display:none;position:absolute;top:0px;left:0px;z-index:9999;"/>
+                        <img class="detailedImage" src="" style="display:block;" />
+                    </div>
+                    <div data-role="popover" id="toolsPopover" data-popup="{'width':'120px','height':'130px','direction':'bottom'}">
+                        <div data-role="view">
+                            <div data-role="content">
+                                <ul data-role="listview" onclick="showHideTool(event)">
+                                    <li tool="none">None</li>
+                                    <li tool="ruler">Ruler</li>
+                                    <li tool="protractor">Protractor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        <!------------------------------------------------------------->
+        <!------------------------Documents --------------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="documents" data-title="DOCUMENTS" data-layout="mainLayout" data-show="getDocuments">
+            <div data-role="content">
+            <!--<center style="margin-top:20px;"><a data-role="button" data-click="getLocalDocuments">Saved Documents</a></center>-->
+                <ul data-role="listview" data-style="inset" id="documents-list">
+                </ul>
+            <div style="display:block;clear:both;width:100%;height:20px;"></div>
+            </div>
+        </div>
+            <div data-role="view" id="documentViewer" data-show="viewDocument">
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <a data-role="button" data-align="left" data-click="goBack">Back</a>				
+                    </div>
+                </div>
+            <div data-role="content">
+            <iframe id="docIFrame" src="" width="800" height="640" seamless="seamless"></iframe>
+            </div>				
+        </div>
+        <!------------------------------------------------------------->
+        <!---------- LAYOUTS, POPOVERS, MODALS AND TEMPLATES ---------->
+        <!------------------------------------------------------------->
+        <div data-role="layout" data-id="mainLayout">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <!--<a data-role="button" data-align="left" class="menuButton" onclick="openDrawer(event)"></a>-->
+                    <a data-role="button" data-align="left" class="homeButton" onclick="Utils.navigate('#homeView')"></a>
+                    <span data-role="view-title"></span>
+                    <a data-role="button" class="right moreButton" data-align="right" onclick="Utils.openPopover('#menuOptionsPopover', $(event.target))"></a>
+                    <a data-role="button" class="right alertButton" data-align="right" onclick="raiseHand(event)"></a>
+                </div>
+            </div>
+            <div data-role="footer" class="footer">
+                <div class="currentSubjectContainer flex">
+                    Current Subject:&nbsp;
+                    <div class="currentSubject"></div>
+                </div>
+            </div>
+            <div data-role="popover" id="menuOptionsPopover" data-popup="{'width':'300px'}">
+                <div data-role="view" id="menuOptionsView" data-init="initMenuOptionsView">
+                    <div class="content">
+                        <div class="form">
+                            <div class="formButtons">
+                                <a data-role="button" class="formButton" onclick="Utils.navigate('#profileView')">My Profile</a>
+                                <a data-role="button" class="formButton" onclick="goToClasses(event)">My Classes</a>
+                                <a data-role="button" class="formButton" onclick="Utils.navigate('#whatsNewView')">What's New</a>
+                                <a data-role="button" class="formButton" onclick="logout(event)">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="layout" data-id="detailsLayout">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" class="backButton" onclick="Utils.navigate('#:back')"></a>
+                    <a data-role="button" data-align="left" class="homeButton" onclick="Utils.navigate('#homeView')"></a>
+                    <span data-role="view-title"></span>
+                    <a data-role="button" class="right moreButton" data-align="right" onclick="Utils.openPopover('#menuOptionsPopover', $(event.target))"></a>
+                    <a data-role="button" class="right alertButton" data-align="right" onclick="raiseHand(event)"></a>
+                </div>
+            </div>
+            <div data-role="footer" class="footer">
+                <div class="currentSubjectContainer flex">
+                    Current Subject:&nbsp;
+                    <div class="currentSubject"></div>
+                </div>
+            </div>
+        </div>
+        <div data-role="modalview" id="eyesOnTeacherModal" style="width:500px;height:300px;opacity:0.9">
+            <div id="eotMessage" class="flex center">Eyes On Teacher</div>
+        </div>
+        <div data-role="modalview" id="scribbleResultModal" style="width:70%;height:80%;" data-title="">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <div class="image"></div>
+        </div>
+        <div data-role="modalview" id="imageModal" style="width:70%;height:80%;" data-title="">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" onclick="Utils.closeModal(event)">Close</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <div class="image"></div>
+        </div>
+        <div data-role="modalview" id="examResultDetailsModal" style="width:900px;height:700px">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                            <span data-role="view-title">Exam Details</span>
+                        </div>
+                    </div>
+                    <div data-role="content">
+                        <table id="examResultDetailsTable">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th style="font-size:1.2rem">Image</th>
+                                    <th style="font-size:1.2rem">Question</th>
+                                    <th style="font-size:1.2rem">Correct Answer</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+        <script id="subjectsTemplate" type="text/x-kendo-template">
+            <td class="subject disabled" id="#:SubjectID##:SectionID#">
+                <div id="subjectID" class="hidden">#:SubjectID#</div>
+                <div id="sectionID" class="hidden">#:SectionID#</div>
+                <div id="subjectName" class="hidden">#:Subject#</div>
+                <div id="teacherID" class="hidden">#:TeacherID#</div>
+                <div id="level" class="hidden">#:Level#</div>
+                <div class="subjectTitle flex center">#:Subject#</div>
+                <div class="subjectDetails flex">
+                    <div>
+                        <div class="subjectSection flex">#:Section#</div>
+                        <div class="subjectTeacher flex">#=TeacherA ? TeacherA : ""#</div>
+                        <div class="subjectTime flex">#=moment(From, 'hh:mm').format('hh:mm A') + " - " + moment(To, 'hh:mm').format('hh:mm A')#</div>
+                    </div>
+                </div>
+            </td>
+        </script>
+        <script src="scripts/libs/fastclick.js"></script>
+        <script src="scripts/libs/moment.js"></script>
+        <script src="scripts/libs/socketio.js"></script>
+        <script src="scripts/Utils.js"></script>
+        <script src="scripts/DB.js"></script>
+        <script src="scripts/WebService.js"></script>
+        <script src="scripts/student.js"></script>
+        <!-- HELPING LIBRARIES -->
+        <script src="scripts/libs/CanvasPlugin.js"></script>
+        <script src="scripts/libs/KeyboardFix.js"></script>
+        <script src="scripts/libs/jquery.dotdotdot.min.js"></script>
+        
+        <script src="scripts/PresentationDownloader.js"></script>
+    </body>
+
+</html>

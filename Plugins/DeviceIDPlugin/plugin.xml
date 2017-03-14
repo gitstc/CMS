@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  id="DeviceIDPlugin"
+  version="0.1.0">
+  <name>DeviceIDPlugin</name>
+  <description>Cordova MacAddress Plugin</description>
+  <license>Apache 2.0</license>
+  <keywords>cordova,DeviceIDPlugin</keywords>
+
+
+  <js-module src="www/DeviceIDPlugin.js" name="DeviceIDPlugin">
+    <clobbers target="DeviceIDPlugin" />
+  </js-module>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="DeviceIDPlugin">
+        <param name="android-package" value="com.stc.DeviceIDPlugin.DeviceIDPlugin"/>
+      </feature>
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    </config-file>
+
+    <source-file src="src/android/DeviceIDPlugin.java" target-dir="src/com/stc/DeviceIDPlugin/" />
+  </platform>
+
+  <!-- ios -->
+  <platform name="ios">
+   <config-file target="config.xml" parent="/*">
+     <feature name="DeviceIDPlugin">
+       <param name="ios-package" value="DeviceIDPlugin" />
+     </feature>
+   </config-file>
+
+   <header-file src="src/ios/DeviceIDPlugin.h" />
+   <source-file src="src/ios/DeviceIDPlugin.m" />
+   <header-file src="src/ios/SSKeychain.h" />
+   <source-file src="src/ios/SSKeychain.m" />
+
+	<framework src="AdSupport.framework" />
+	<framework src="Security.framework" />
+ </platform>
+
+</plugin>

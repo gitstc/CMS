@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
+
+        <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet">
+
+        <link href="styles/default.css" rel="stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
+        <link href="styles/teacher.css" rel="stylesheet">
+
+        <script src="cordova.js"></script>
+        <script src="scripts/libs/NativePageTransitionsKendoAdapter.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
+    </head>
+
+    <body>
+        <div id="notification-bar">
+            <div class="message flex center"></div>
+        </div>
+        <div data-role="drawer" id="drawer" data-swipe-to-open="false">
+            <div data-role="header">
+                <div data-role="navbar"></div>
+            </div>
+            <ul data-role="listview" class="sideMenu">
+                <li>
+                    <a data-role="button" class="flex" onclick="Utils.navigate('#whatsNewView')">What's New</a>
+                </li>
+                <li>
+                    <a data-role="button" class="flex" onclick="logout(event)">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <!------------------------------------------------------------->
+        <!--------------------------- SUBJECTS ------------------------>
+        <!------------------------------------------------------------->
+        <div data-role="view" id="subjectsView" data-title="Subjects" data-init="initSubjectsView">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <div data-role="content">
+                <table id="subjectsContainer"></table>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!----------------------------- HOME -------------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="homeView" data-title="Home" drawer-enabled data-layout="mainLayout" data-init="initHomeView">
+            <div data-role="content">
+                <div id="menuContainer">
+                    <table id="mainMenu" style="opacity:0">
+                        <tr>
+                            <td class="menuItem" onclick="Utils.navigate('#attendanceView')">
+                                <div class="icon attendance"></div>
+                                <div class="title flex center">Attendance</div>
+                            </td>
+                            <td class="menuItem" onclick="Utils.navigate('#pollUnitsView')">
+                                <div class="icon polls"></div>
+                                <div class="title flex center">Polls</div>
+                            </td>
+                            <td class="menuItem" onclick="Utils.navigate('#shareLinksView')">
+                                <div class="icon shareLinks"></div>
+                                <div class="title flex center">Share Links</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menuItem" onclick="Utils.navigate('#scribbleUnitsView')">
+                                <div class="icon scribble"></div>
+                                <div class="title flex center">Scribble</div>
+                            </td>
+                            <td class="menuItem" onclick="Utils.navigate('#broadcastUnitsView')">
+                                <div class="icon screenBroadcast"></div>
+                                <div class="title flex center">Screen Broadcast</div>
+                            </td>
+                            <td class="menuItem" onclick="eyesOnTeacher(event)">
+                                <div class="icon eyesOnTeacher"></div>
+                                <div class="title flex center">Eyes On Teacher</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menuItem" onclick="Utils.navigate('#presentationUnitsView')">
+                                <div class="icon presentations"></div>
+                                <div class="title flex center">Presentations</div>
+                            </td>
+                            <td class="menuItem" onclick="Utils.navigate('#examUnitsView')">
+                                <div class="icon exams"></div>
+                                <div class="title flex center">Exams</div>
+                            </td>
+                            <td class="menuItem" onclick="Utils.navigate('#documents')">
+                                <div class="icon documents"></div>
+                                <div class="title flex center">Documents</div>
+                            </td>
+                         </tr>
+                        <tr>
+                            <td class="menuItem" onclick="Utils.navigate('#noteUnitsView')">
+                                <div class="icon notes"></div>
+                                <div class="title flex center">Notes</div>
+                            </td>
+                          </tr>
+                            <!-- 
+                        <td class="menuItem" onclick="shareYoutube(event)">
+                        <div class="icon shareYoutube"></div>
+                        <div class="title flex center">Share Videos</div>
+                        </td>
+                        </tr>-->
+                        <!-- <td class="menuItem" onclick="TestSockets(event)">
+                        <div class="icon shareYoutube"></div>
+                        <div class="title flex center">Test Sockets</div>
+                        </td>
+                        -->
+                    </table>
+                </div>
+                <div id="studentsSideListContainer">
+                    <ul data-role="listview" id="studentsSideList" data-source="studentsDS" data-template="studentsSideTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="studentsSideTemplate" type="text/x-kendo-template">
+                <div class="studentContainer flex #=isPresent ? 'present' : ''#">
+                    <div class="attendanceStatus"></div>
+                    <div class="studentName">#:FullEName#</div>
+                </div>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!-------------------------- ATTENDANCE ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="attendanceView" data-title="Attendance" data-layout="detailsLayout" data-init="initAttendanceView">
+            <div class="content">
+                <ul data-role="listview" id="attendanceList" data-source="attendanceDS" data-template="attendanceTemplate" data-auto-bind="false" data-bound="attendanceListBound"></ul>
+            </div>
+            <div data-role="popover" id="attendanceNotesPopover" data-popup="{'width':'400','height':'300'}">
+                <div data-role="view" data-title="Notes" data-init="initAttendanceNotesView">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <a data-role="button" data-align="left" class="deleteButton" onclick="deleteAttendanceNote(event)"></a>
+                            <span data-role="view-title"></span>
+                            <a data-role="button" data-align="right" class="saveButton" onclick="saveAttendanceNote(event)"></a>
+                        </div>
+                    </div>
+                    <div data-role="content">
+                        <textarea id="attendanceNoteTextArea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <script id="attendanceTemplate" type="text/x-kendo-template">
+                <div class="container #=isPresent ? 'online' : 'offline'#" onclick="changeStudentStatus(event)">
+                    <div class="actions">
+                        <div class="action notes" onclick="addRegistrationNote(event)"></div>
+                        <div class="action studentStatus"></div>
+                    </div>
+                    <div class="profilePictureContainer">
+                        <div class="profilePicture" background-image="#=Utils.getProfilePicturePath(Picture, true)#"></div>
+                    </div>
+                    <div class="studentName flex center">#:FullEName#</div>
+                </div>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!------------------------- SHARE LINKS ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="shareLinksView" data-title="Share Links" data-layout="detailsLayout" data-init="initShareLinksView">
+            <div data-role="content">
+                <!--<ul id="shareTabs">
+                <li>
+                <a>Links</a>
+                </li>
+                <li>
+                <a>Videos</a>
+                </li>
+                </ul>
+                <div class="buttonGroupPane">
+                <div class="topActions">
+                <a data-role="button" class="action" onclick="Utils.openPopover('#addSharedLinkPopover', $(this))">Add Link</a>
+                </div>
+                <div class="content">
+                <ul data-role="listview" id="shareLinksList" data-source="shareLinksDS" data-template="shareLinksTemplate"></ul>
+                </div>
+                </div>
+                <div class="buttonGroupPane" style="display:none">
+                <div class="topActions">
+                <a data-role="button" class="action" onclick="addYoutubeVideo(event)">Add Video</a>
+                </div>
+                <div class="content">
+                <ul data-role="listview" id="shareLinksList" data-source="shareLinksDS" data-template="shareLinksTemplate"></ul>
+                </div>
+                </div>-->
+                <div class="topActions">
+                    <a data-role="button" class="action" onclick="Utils.openPopover('#addSharedLinkPopover', $(this))">Add Link</a>
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="shareLinksList" data-source="shareLinksDS" data-template="shareLinksTemplate"></ul>
+                </div>
+            </div>
+            <div data-role="popover" id="addSharedLinkPopover" data-popup="{'width':'400'}">
+                <div data-role="view" data-title="Add Link">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title"></span>
+                        </div>
+                    </div>
+                    <div data-role="content">
+                        <div class="form">
+                            <input type="text" id="txtLinkTitle" class="formInput flex" placeholder="Title" />
+                            <input type="text" id="txtLinkURL" class="formInput flex" placeholder="Link" />
+                            <div class="formButtons">
+                                <a data-role="button" class="formButton" onclick="saveSharedLink(event)">Save Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-role="popover" id="linkDetailsPopover" data-popup="{'width':'400', 'direction': 'left'}">
+                <div data-role="view" data-title="Link Details">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title"></span>
+                        </div>
+                    </div>
+                    <div data-role="content">
+                        <div class="form">
+                            <input type="text" id="txtLinkID" class="hidden" placeholder="ID" />
+                            <input type="text" id="txtLinkTitle" class="formInput flex" placeholder="Title" />
+                            <input type="text" id="txtLinkURL" class="formInput flex" placeholder="Link" />
+                            <div class="formButtons">
+                                <a data-role="button" class="formButton" onclick="updateSharedLink(event)">Update Link</a>
+                                <a data-role="button" class="formButton" onclick="viewSharedLink(event)">View Link</a>
+                                <a data-role="button" class="formButton share" onclick="shareUnshareSharedLink(event)">Share Link</a>
+                                <a data-role="button" class="formButton delete" onclick="deleteSharedLink(event)">Delete Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script id="shareLinksTemplate" type="x-kendo-template">
+                <a class="container" onclick="viewSharedLinkDetails(event)">
+                    <div class="linkTitle flex">#:Title#</div>
+                    <div class="linkURL flex">#:Link#</div>
+                </a>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!-------------------------- BROADCASTS ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="broadcastUnitsView" data-title="Select Unit" data-layout="detailsLayout" data-init="initBroadcastUnitsView" data-show="showBroadcastUnitsView">
+            <div data-role="content">
+                <div class="topActions">
+
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="broadcastUnitsList" data-source="unitsDS" data-template="broadcastUnitsTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="broadcastUnitsTemplate" type="text/x-kendo-template">
+                <a class="container" onClick="Utils.navigate('\#broadcastView?unitID=#=ID#&unit=#=Name#')">
+                    <div class="unitTitle flex">#:Name#</div>
+                </a>
+            </script>
+        </div>
+        <div data-role="view" id="broadcastView" data-title="Screen Broadcast" data-layout="detailsLayout" data-init="initBroadcastView" data-show="showBroadcastView">
+            <div data-role="content">
+                <div class="topActions">
+                    <div class="title flex">
+                        Unit:&nbsp;<span class="currentUnit"></span>
+                    </div>
+                    <a data-role="button" class="action" onclick="getBroadcastPicture(event)">Get Picture</a>
+                    <a data-role="button" class="action" onclick="getBroadcastPictureFromTemplate(event)">Get From Template</a>
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="broadcastsList" data-source="broadcastsDS" data-template="broadcastsTemplate" data-bound="broadcastsListBound" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="broadcastsTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="imageContainer">
+                        <div class="image" background-image="#=Utils.getPicturePath(Path)#"></div>
+                    </div>
+                    <div class="actions">
+                        <a data-role="button" class="action" onclick="onclickStartBroadcast(event, #:ID#)">Start Broadcast</a>
+                    </div>
+                </div>
+            </script>
+        </div>
+        <div data-role="view" id="broadcastDetailsView" data-title="Screen Broadcast" data-layout="detailsLayout" data-init="initBroadcastDetailsView" data-show="showBroadcastDetailsView">
+            <div data-role="content">
+                <div id="broadcastCanvasContainer">
+                    <canvas id="broadcastCanvas"></canvas>
+                </div>
+                <div class="drawingTools">
+                    <div class="drawingToolsContainer">
+                        <ul data-role="listview" class="drawingToolsList">
+                            <li class="drawingTool" color="eraser"></li>
+                            <li class="drawingTool active" color="black"></li>
+                            <li class="drawingTool" color="red"></li>
+                            <li class="drawingTool" color="lime"></li>
+                            <li class="drawingTool" color="lightblue"></li>
+                            <li class="drawingTool" color="yellow"></li>
+                            <li class="drawingTool" color="pink"></li>
+                            <li class="drawingTool" color="purple"></li>
+                        </ul>
+                    </div>
+                    <div class="drawingActions">
+                        <a data-role="button" class="action" onclick="clearBroadcast(event)">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!--------------------------- SCRIBBLE ------------------------>
+        <!------------------------------------------------------------->
+        <div data-role="view" id="scribbleUnitsView" data-title="Select Unit" data-layout="detailsLayout" data-init="initScribbleUnitsView" data-show="showScribbleUnitsView">
+            <div data-role="content">
+                <div class="topActions">
+
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="scribbleUnitsList" data-source="unitsDS" data-template="scribbleUnitsTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="scribbleUnitsTemplate" type="text/x-kendo-template">
+                <a class="container" onClick="Utils.navigate('\#scribbleView?unitID=#=ID#&unit=#=Name#')">
+                    <div class="unitTitle flex">#:Name#</div>
+                </a>
+            </script>
+        </div>
+        <div data-role="view" id="scribbleView" data-title="Scribble" data-layout="detailsLayout" data-init="initScribblesView" data-show="showScribblesView">
+            <div data-role="content">
+                <div class="topActions">
+                    <div class="title flex">
+                        Unit:&nbsp;<span class="currentUnit"></span>
+                    </div>
+                    <a data-role="button" class="action" onclick="Utils.navigate('#addScribbleView')">Create Scribble</a>
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="scribblesList" data-source="scribblesDS" data-template="scribblesTemplate" data-bound="scribblesListBound" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="scribblesTemplate" type="text/x-kendo-template">
+                <a class="container" onclick="Utils.navigate('\#scribbleDetailsView?id=#:ID#')">
+                    <div class="scribbleTitle flex">#:Title#</div>
+                    <div class="scribbleDate flex">#:Date#</div>
+                </a>
+            </script>
+        </div>
+        <div data-role="view" id="addScribbleView" data-title="New Scribble" data-layout="detailsLayout" data-init="initAddScribbleView">
+            <div data-role="content">
+                <div class="topActions">
+                    <a data-role="button" class="action" onclick="getScribblePicture(event)">Get Picture</a>
+                    <a data-role="button" class="action" onclick="getScribblePictureFromTemplate(event)">Get From Template</a>
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="scribbleContentsList" data-source="scribbleContentsDS" data-template="scribbleContentsTemplate" data-bound="scribbleContentsListBound" data-auto-bind="false"></ul>
+                </div>
+            </div>
+        </div>
+        <div data-role="view" id="scribbleDetailsView" data-title="Scribble Results" data-layout="detailsLayout" data-init="initScribbleDetailsView" data-show="showScribbleDetailsView">
+            <div data-role="content">
+                <ul data-role="listview" id="scribbleResultsList"></ul>
+            </div>
+            <script id="scribbleResultTemplate" type="text/x-kendo-template">
+                <li class="scribbleResult" onclick="viewScribble(event)">
+                    <div class="container">
+                        <div class="studentName flex center">
+                            #:StudentName#
+                        </div>
+                        <div class="imageContainer">
+                            <div class="image" background-image="#=Utils.getPicturePath(Scribble)#"></div>
+                        </div>
+                        <div class="actions">
+                            # if (DefaultScribble) { #
+                                <a data-role="button" class="action"></a>
+                            # } else { #
+                                <a data-role="button" class="action" onclick="onclickShareScribble(event)" action="share">Share</a>
+                            # } #
+                        </div>
+                    </div>
+                </li>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!---------------------------- POLLS -------------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="pollUnitsView" data-title="Select Unit" data-layout="detailsLayout" data-init="initPollUnitsView" data-show="showPollUnitsView">
+            <div data-role="content">
+                <div class="topActions">
+
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="pollUnitsList" data-source="unitsDS" data-template="pollUnitsTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="pollUnitsTemplate" type="text/x-kendo-template">
+                <a class="container" onClick="Utils.navigate('\#pollsView?unitID=#=ID#&unit=#=Name#')">
+                    <div class="unitTitle flex">#:Name#</div>
+                </a>
+            </script>
+        </div>
+        <div data-role="view" id="pollsView" data-layout="detailsLayout" data-title="Polls" data-init="initPollsView" data-show="showPollsView">
+            <div data-role="content">
+                <div class="topActions">
+                    <div class="title flex">
+                        Unit:&nbsp;<span class="currentUnit"></span>
+                    </div>
+                    <a data-role="button" class="action" onclick="Utils.navigate('#editPollView')">Add Poll</a>
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="pollsList" data-source="pollsDS" data-template="pollsTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="pollsTemplate" type="text/x-kendo-template">
+                <a class="container" onclick="viewPollDetails(event, #:ID#)">
+                    <div class="pollTitle flex">
+                        #:Title#
+                    </div>
+                </a>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!-------------------------- EDIT POLL ------------------------>
+        <!------------------------------------------------------------->
+        <div data-role="view" id="editPollView" data-layout="detailsLayout" data-title="Add Poll" data-init="initEditPollView" data-show="showEditPollView">
+            <div data-role="content">
+                <div class="topActions">
+                    <a data-role="button" class="action" action="saveAndRun" onclick="savePoll(event)">Save &amp; Run</a>
+                    <a data-role="button" class="action" action="save" onclick="savePoll(event)">Save</a>
+                </div>
+                <div id="pollQuestionContainer" class="form">
+                    <input type="text" class="formInput" id="txtPollQuestion" placeholder="Question" />
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="pollChoicesList" data-source="pollChoicesDS" data-template="pollChoicesTemplate" data-bound="pollChoicesListBound"></ul>
+                    <div class="form">
+                        <div class="formButtons">
+                            <a data-role="button" id="btnAddPollChoice" class="formButton" onclick="addPollChoice(event)">Add Choice</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script id="pollChoicesTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="choiceContainer">
+                        <div class="form">
+                            <input type="text" class="formInput flex" placeholder="Choice" value="#:Choice#" readonly onclick="editPollChoice(event)" />
+                        </div>
+                    </div>
+                    <div class="choiceImageContainer">
+                        <div class="choiceImage" onclick="getPollChoiceImage(event)" style="background-image:url(#=ChoiceImage === '' ? 'none' : ChoiceImage#)"></div>
+                    </div>
+                    <div class="choiceActions flex center">
+                        <div class="choiceActionsContainer">
+                            <input type="checkbox" class="checkbox action check" onclick="checkPollChoiceRadio(event)" />
+                            <a data-role="button" class="action delete" onclick="removePollChoice(event)"></a>
+                        </div>
+                    </div>
+                </div>
+            </script>
+            <div data-role="modalview" id="editPollChoiceModal" style="width:70%;height:200px" data-title="Edit Choice">
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                        <span data-role="view-title"></span>
+                        <a data-role="button" onclick="savePollChoice(event)" data-align="right">Save</a>
+                    </div>
+                </div>
+                <div class="form">
+                    <input type="text" class="formInput" id="pollChoice" placeholder="Choice" />
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!------------------------ POLL DETAILS ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="pollDetailsView" data-layout="detailsLayout" data-title="Add Poll" data-init="initPollDetailsView" data-show="showPollDetailsView">
+            <div data-role="content">
+                <div class="topActions">
+                    <a data-role="button" class="action run" onclick="rerunPoll(event)">Run Poll</a>
+                    <a data-role="button" class="action" onclick="viewPollResults(event)">View Results</a>
+                </div>
+                <div id="pollQuestionContainer" class="form">
+                    <div class="formInput" id="txtPollQuestion"></div>
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="pollChoicesList" data-source="pollChoicesDS" data-template="pollDetailsChoicesTemplate"></ul>
+                </div>
+            </div>
+            <script id="pollDetailsChoicesTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="choiceContainer">
+                        <div class="form">
+                            <input type="text" class="formInput readonly" placeholder="Choice" value="#:Choice#" />
+                        </div>
+                    </div>
+                    <div class="choiceImageContainer">
+                        <div class="choiceImage" onclick="getPollChoiceImage(event)" style="background-image:url(#=ChoiceImage === '' ? 'none' : ChoiceImage#)"></div>
+                    </div>
+                </div>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!------------------------ POLL RESULTS ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="pollResultsView" data-layout="detailsLayout" data-title="Poll Results" data-init="initPollResultsView" data-show="showPollResultsView">
+            <div data-role="content">
+                <div class="topActions">
+                    <a data-role="button" class="action" onclick="viewPollResultsDetails(event)">View Details</a>
+                </div>
+                <div id="pollQuestionContainer" class="form">
+                    <div class="formInput" id="txtPollQuestion"></div>
+                </div>
+                <div class="content">
+                    <div id="pollResultsChart"></div>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!-------------------- POLL RESULTS DETAILS-------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="pollResultDetailsView" data-layout="detailsLayout" data-title="Poll Results" data-init="initPollResultDetailsView" data-show="showPollResultDetailsView">
+            <div data-role="content">
+                <div id="pollQuestionContainer" class="form">
+                    <div class="formInput" id="txtPollQuestion"></div>
+                </div>
+                <div class="content">
+                    <div id="pollResultTables"></div>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!----------------------- WHATS NEW --------------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="whatsNewView" data-layout="mainLayout" data-title="What's New" data-init="initWhatsNewView" data-show="showWhatsNewView">
+            <div data-role="content">
+                <ul data-role="listview" id="whatsNewList" data-source="whatsNewDS" data-template="whatsNewTemplate"></ul>
+            </div>
+            <script id="whatsNewTemplate" type="text/x-kendo-template">
+                <a class="container" onclick="Utils.navigate('\#whatsNewDetailsView?id=#:ID#', 'slide:left')">
+                    <span class="title">#=Title#</span>
+                    <span class="date">#=Date#</span>
+                </a>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!--------------------- WHATS NEW DETAILS --------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="whatsNewDetailsView" data-layout="detailsLayout" data-title="What's New" data-init="initWhatsNewDetailsView" data-show="showWhatsNewDetailsView">
+            <div data-role="content">
+                <div class="header">
+                    <span class="title"></span>
+                    <span class="date"></span>
+                </div>
+                <div class="content">
+                    <span class="message"></span>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!----------------------- PRESENTATIONS ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="presentationUnitsView" data-title="Select Unit" data-layout="detailsLayout" data-init="initPresentationUnitsView" data-show="showPresentationUnitsView">
+            <div data-role="content">
+                <div class="topActions">
+
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="presentationUnitsList" data-source="unitsDS" data-template="presentationUnitsTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="presentationUnitsTemplate" type="text/x-kendo-template">
+                <a class="container" onClick="Utils.navigate('\#presentationsView?unitID=#=ID#&unit=#=Name#')">
+                    <div class="unitTitle flex">#:Name#</div>
+                </a>
+            </script>
+        </div>
+        <div data-role="view" id="presentationsView" data-layout="mainLayout" data-title="Share Content" data-init="initPresentationsView" data-show="showPresentationsView" drawer-enabled>
+            <div data-role="content">
+                <!--<div class="topActions">
+                <a data-role="button" class="action" onclick="viewPollResultsDetails(event)">View Details</a>
+                </div>-->
+                <div class="content">
+                    <ul data-role="listview" id="presentationsList" data-source="presentationsDS" data-template="presentationsTemplate" data-bound="presentationsListBound" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="presentationsTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="detailsContainer">
+                        <div class="image" background-image="#=Utils.getPicturePath(Thumbnail)#"></div>
+                        <div class="details flex">
+                            <div class="title">#=Title#</div>
+                            <div class="date">#=Date#</div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a data-role="button" class="action" onclick="onclickStartPresentation(event, #:ID#)">Start Presentation</a>
+                    </div>
+                </div>
+            </script>
+        </div>
+        <div data-role="view" id="presentationDetailsView" data-layout="detailsLayout" data-title="Share Content" data-init="initPresentationDetailsView" data-show="showPresentationDetailsView" drawer-enabled>
+            <div data-role="content">
+                <div class="header">
+                    <div id="presentationProgress" class="headerItem">
+                        <div>
+                            Slide&nbsp;<span class="value"></span>
+                        </div>
+                    </div>
+                    <div class="headerItem title">
+                        <div class="value"></div>
+                    </div>
+                    <div id="presentationActions" class="headerItem">
+                        <!--<a data-role="button" class="action" onclick="fullScreenPresentation(event)"></a>-->
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="mainContentContainer">
+                        <div class="mainSlidesContainer">
+                            <div id="mainSlidesScroller"></div>
+                        </div>
+                        <div class="overlaySlidesContainer">
+
+                        </div>
+                    </div>
+                    <div class="slidesThumbnailsContainer">
+                        <div class="menuTab" onclick="toggleSlidesThumbnails(event)"></div>
+                        <div class="slidesThumbnailsScroller" data-role="scroller">
+                            <div class="listContainer">
+                                <ul data-role="listview" id="slidesThumbnailsList" data-source="presentationSlidesDS" data-template="slidesThumbnailsTemplate" data-bound="slideThumbnailsListBound" data-click="slideThumbnailClicked"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script id="presentationSlidesTemplate2" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="slide" style="background-image:url(#=Utils.getPicturePath(Thumbnail)#)"></div>
+                </div>
+            </script>
+            <script id="presentationSlidesTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <canvas class="slide" style="background-image:url(#=Utils.getPicturePath(Content)#)"></canvas>
+                </div>
+            </script>
+            <script id="slidesThumbnailsTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="slide" background-image="#=Utils.getPicturePath(Thumbnail)#"></div>
+                </div>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+
+        <!-----------------------     EXAMS     ----------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="examUnitsView" data-title="Select Unit" data-layout="detailsLayout" data-init="initExamUnitsView" data-show="showExamUnitsView">
+            <div data-role="content">
+                <div class="topActions">
+
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="examUnitsList" data-source="unitsDS" data-template="examUnitsTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="examUnitsTemplate" type="text/x-kendo-template">
+                <a class="container" onclick="Utils.navigate('\#examView?unitID=#=ID#&unit=#=Name#')">
+                    <div class="unitTitle flex">#:Name#</div>
+                </a>
+            </script>
+        </div>
+        <div data-role="view" id="examView" data-layout="mainLayout" data-title="Share Content" data-init="initExamsView" data-show="showExamsView" drawer-enabled>
+            <div data-role="content">
+                 <div class="topActions">
+                    <div class="title flex">
+                        Unit:&nbsp;<span class="currentUnit"></span>
+                    </div>
+                    <a data-role="button" class="action" onclick="createNewExam(event)">Create Exam</a>
+                   <!-- <a data-role="button" class="action" onclick="getBroadcastPictureFromTemplate(event)">Get From Template</a> -->
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="examsList" data-source="examsDS" data-template="examsTemplate" data-bound="examsListBound" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="examsTemplate" type="text/x-kendo-template">
+                <div class="container" >
+                    <div class="detailsContainer">
+                        <div class="image" ></div>
+                        <div class="details flex">
+                            <span style="display:none" id="examID">#=ID#</span>
+                            <div class="title">#=Description#</div>
+                            <div class="date">#=StartDate#</div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a data-role="button" class="action" onClick="Utils.navigate('\#examDetails?id=#:ID#')">#=Description#<br/>#=StartDate#<br/></a>
+                    </div>
+                </div>
+                
+            </script>
+        </div>
+        <div data-role="view" id="examDetails" data-init="initExamTabs" data-show="getExamDetails" data-title="EXAM" data-layout="detailsLayout">
+            <div data-role="content">
+                
+                <a data-role="button" id="editExamButton" data-click="editExam" style="width:4em;height:2em;line-height:2em;margin:1em;font-size:1.2rem;float:left;">Edit</a>
+                <!--<a data-role="button" id="groupSelectorButton" href="#groupSelectorPopover" data-rel="popover" style="width:4em;height:2em;line-height:2em;margin:1em;font-size:1.2rem;float:right">Groups</a>-->
+                <ul id="examViewTabs" data-index="0" style="margin-top:28px">
+                    <li style="width:110px;" dyn-title="tch_exam_results_tab">Results</li>
+                    <li style="width:110px;" dyn-title="tch_exam_questions_tab">Questions</li>
+                </ul>
+              
+                <div id="examResultsView" class="examsTab">
+                    <div data-role="navbar" class="customNavbar">
+                        <span id="examTitle" data-align="left" style="font-size:3em;"></span>
+                        <span id="examTimer" data-align="center" style="color:black">00:00:00</span> 
+                        <a id="startExamBtn" data-role="button" data-align="right" style="width:150px;background:green;margin-right:8px;margin-top:10px;height:2em;line-height:2em;font-size:1.2rem;float:left;color:white;"  onClick="Utils.openPopover('#startExamOptionsPopover', $(event.target))" data-rel="popover" dyn-title="tch_start_exam">Start Exam</a>
+                        <a id="endExamBtn" data-role="button" data-align="right" class="disabled" style="width:150px;background:red;margin-right:8px;margin-top:10px;height:2em;line-height:2em;font-size:1.2rem;float:left;color:white;" data-click="endExam" dyn-title="tch_end_exam">End Exam</a>
+                    </div>
+                    
+                    <!--<div style="display:none;float:right;width:300px;height:200px;margin-right:40px;padding:0px;margin:0px" id="examResultsChart"></div>-->
+                    <!--<a data-role="button" id="shareExamResultsButton" data-click="shareResults" style="display:none !important;float:right;width:30px;height:50px;line-height:50px;font-size:2rem;margin-right:16px;margin-top:60px;" data-icon="shareIcon" active="false"></a>-->
+                   <div id="examTitleContainer" style="display:none;float:right;width:50%;height:100%;;padding-top:80px;font-size:3em">fdfd</div>
+                    <div class="resultContainer">
+                        <ul id="examsResultsHeader" data-role="listview" style="clear:both;">
+                            <li style="padding:0px">
+                            </li>
+                        </ul>
+                        <div data-role="scroller" id="studentResultsScroller">
+                            <div id="studentResults" style="display:block;margin-top:0px;">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="chartContainer">
+                         <div style="display:block;float:right;width:100%;height:80%;margin-right:40px;padding:0px;margin:0px" id="examResultsChart"></div>
+                        <a data-role="button" id="shareExamResultsButton" data-click="shareResults" style="display:block;width:30px;height:50px;line-height:50px;font-size:2rem;margin: 0px auto;" data-icon="shareIcon" active="false"></a>
+                    </div>
+                    <div data-role="popover" id="startExamOptionsPopover" data-popup="{'width':'500px','height':'550px'}">
+                        <div data-role="view" class="popover-view">
+                            <div data-role="header">
+                                <div data-role="navbar">
+                                    <span data-role="title" dyn-title="tch_students_list" style="padding-right: 101px;">Students List</span>
+                                    <a data-role="button" data-align="right" data-click="startExam">Start Exam</a>
+                                </div>
+                            </div>
+                            <div data-role="content">
+                                <ul id="examStudentsList" data-role="listview" data-source="onlineStudentsData" data-template="examStudentsListTemplate" data-click="selectUnselectStudents"></ul>
+                            </div>
+                            <div data-role="footer">
+                                <div data-role="navbar">
+                                    <span data-role="view-title" style="opacity:0" dyn-title="tch_exam_check_all_students">Check All</span>
+                                    <a data-role="button" data-align="right" data-click="checkUncheckAllStudents" status="uncheck" style="float:left;" dyn-title="tch_exam_uncheck_all_students">Uncheck All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="examQuestionsView" class="examsTab" style="display:none">
+                    <ul data-role="listview" data-style="inset" id="examQuestionsListHeader">
+                    </ul>
+                    <!--
+                    <ul data-role="listview" data-style="inset" id="examQuestionsList">
+                    </ul>
+                    -->
+                    <table id="examQuestionsList"></table>
+                </div>
+            </div>
+            <div data-role="popover" id="groupSelectorPopover" data-popup="{'width':'200','height':'250'}">
+                <div data-role="view" class="popover-view">
+                    <ul id="groupSelectorList" data-role="listview" data-click="selectColor">
+                        <li style="background:white" class="white" value="0">None</li>
+                        <li style="background:red;" class="red" value="1">Group 1</li>
+                        <li style="background:blue;" class="blue" value="2">Group 2</li>
+                        <li style="background:green;" class="green" value="3">Group 3</li>
+                        <li style="background:yellow;" class="yellow" value="4">Group 4</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="examName" style="display:none"></div>
+            <div id="examDuration" style="display:none"></div>
+            <div id="examMark" style="display:none"></div>
+        </div>
+        <!--------------------------------------------------------------->
+        <!-------------------------Create New Exam----------------------->
+        <!--------------------------------------------------------------->
+        <div data-role="view" id="createExamView" data-title="Create Exam" data-layout="mainLayout" drawer-enabled>
+            <center><h1>Create Exam</h1></center>
+            <ul data-role="listview" data-style="inset">
+                <li><span style="color:green">Exam Title: </span><input type="text" id="examTitle" placeholder="Title"/></li>
+                <li><span style="color:green">Exam Type:</span>
+                    <select id="examType">
+                    <option value="1" selected="selected">Quiz</option>
+                    <option value="2">Exam</option>
+                    </select>
+                </li>
+                <li><span style="color:green">Exam Mark: </span><input type="number" id="examMark" value="0"/></li>
+                <li><span style="color:green">Exam Date: </span><input type="date" id="examDate"/></li>
+                <!--<li><span style="color:green">Exam Start Time: </span><input type="time" id="examStartTime"/></li>
+                <li><span style="color:green">Exam End Time: </span><input type="time" id="examEndTime"/></li>-->
+            </ul>
+            <center><a data-role="button" data-click="saveExam" style="height:40px;line-height:40px;font-size:1.6rem">Create</a></center>
+        </div>
+       <div data-role="view" id="examFillDetails" data-title="Exam Details" data-layout="mainLayout" data-show="getExamMasterDetails" drawer-enabled>
+            <a data-role="button" onclick="Utils.navigate('#:back')" style="width:4em;height:2em;line-height:2em;margin:1em;font-size:1.2rem;">Back</a>
+            <center><h1>Fill Exam Questions</h1></center>
+            <ul data-role="listview" data-style="inset">
+                <li><span style="color:green">Exam Title: </span><span id="exam_detail_title"></span></li>
+                <li><span style="color:green">Exam Mark: </span><span id="exam_detail_mark"></span></li>
+                <li><span style="color:green">Exam Date: </span><span id="exam_detail_date"></span></li>
+                <!--<li><span style="color:green">Exam Start Time: </span><span id="exam_detail_startTime"></span></li>
+                <li><span style="color:green">Exam End Time: </span><span id="exam_detail_endTime"></span></li>-->
+            </ul>
+            <ul data-role="listview" id="examDetailsQuestionsList" data-style="inset">
+            </ul>
+            <center><a data-role="button" onClick="Utils.openPopover('#questionTypePopover',$(event.target))" data-rel="popover" style='height:40px;line-height:40px;font-size:1.2rem'>Add Question</a></center>
+            
+                <div id="questionTypePopover" data-role="popover" data-popup="{'width':'250','height':'224','direction':'right'}">
+                    <div data-role="view" id="mainQTypeView" class="popover-view">
+                        <div data-role="header">
+                            <div data-role="navbar">
+                                <span data-role="view-title">Question Type</span>
+                            </div>
+                        </div>
+                        <ul data-role="listview" data-click="addExamQuestion">
+                            <li action="add" type="3"><a>Essay</a></li>
+                            <li><a onclick="Utils.navigate('#multChoiceCount', 'slide:left', '#questionTypePopover')">Multiple Choice</a></li>
+                            <li><a onclick="Utils.navigate('#multiValueCount', 'slide:left', '#questionTypePopover')">Multivalue</a></li>
+                            <li action="add" type="1"><a>True / False</a></li>
+                            <!--<li action="add" type="5"><a>Matching</a></li>-->
+                        </ul>
+                    </div>
+                    <div data-role="view" id="multChoiceCount">
+                        <div data-role="header">
+                            <div data-role="navbar">
+                                <a onclick="Utils.navigate('#:back', 'slide:left', '#questionTypePopover')" data-align="left">Back</a>
+                            </div>
+                        </div>
+                        <ul data-role="listview" data-click="addExamQuestion">
+                            <li action="add" type="2" val=2><a>2 Choices</a></li>
+                            <li action="add" type="2" val=3><a>3 Choices</a></li>
+                            <li action="add" type="2" val=4><a>4 Choices</a></li>
+                        </ul>
+                    </div>
+                    <div data-role="view" id="multiValueCount">
+                        <div data-role="header">
+                            <div data-role="navbar">
+                                <a onclick="Utils.navigate('#:back', 'slide:left', '#questionTypePopover')" data-align="left">Back</a>
+                            </div>
+                        </div>
+                        <ul data-role="listview" data-click="addExamQuestion">
+                            <li action="add" type="4" val=2><a>2 Choices</a></li>
+                            <li action="add" type="4" val=3><a>3 Choices</a></li>
+                            <li action="add" type="4" val=4><a>4 Choices</a></li>
+                        </ul>
+                    </div>
+                </div>
+     </div>
+         <div data-role="modalview" id="addQuestionModal" style="width:700px;height:451px">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" onClick="cancelAddQuestion(event,'addQuestionModal')">Cancel</a>
+                    <span data-role="view-title">Add Question</span>
+                    <!--<a data-role="button" data-align="right" data-click="addQuestion">Add</a>-->
+                    <a data-role="button" data-align="right" data-click="uploadPhoto">Add</a>
+                </div>
+            </div>
+            <div data-role="content">
+                <div id="qType" style="display:none"></div>
+                <div style="display:block;width:100%;min-height:60px;">
+                    <span class="fb_q_number"></span>
+                    <input type="text" id="fb_question" placeholder="Question" />
+                </div>
+                <div style="display:block;width:100%;height:340px;">
+                    <div id="questionsContainer" style="display:block;width:65%;height:340px;float:left;">
+                    </div>
+                    <div style="display:block;width:35%;height:340px;float:right;">
+                        <div>
+                            <input type="number" class="fb_q_grade" placeholder="Grade" />
+                        </div>
+                        <a data-role="button" onClick="Utils.openPopover('#imageSourcePopover',$(event.target))" data-rel="popover" style="display:block;width:100px;height:40px;line-height:40px;margin:0 auto;margin-top:20px;">Add Photo</a>
+                        <div id="questionImageContainer">
+                            <img id="questionImage" style="display:block;width:200px;height:160px;margin:0 auto;margin-top:0px;"/>
+                        </div>
+                        <div data-role="popover" id="imageSourcePopover" data-popup="{'width':'230','height':'130','direction':'right'}">
+                            <div data-role="view" class="popover-view">
+                                <a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="CAMERA" container="questionImageContainer" data-click="getPhoto" dyn-title="source_camera">CAMERA</a>
+                                <a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="PHOTOLIBRARY" container="questionImageContainer" data-click="getPhoto" dyn-title="source_library">PHOTO LIBRARY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-role="popover" id="addInputMethodPopover" data-popup="{'width':'230','height':'130'}">
+                <div data-role="view" class="popover-view">
+                	<a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="CAMERA" data-click="getChoicePhoto" dyn-title="source_camera">CAMERA</a>
+                    <a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="PHOTOLIBRARY" data-click="getChoicePhoto" dyn-title="source_library">PHOTO LIBRARY</a>
+                </div>
+            </div>
+        </div>
+        <div data-role="modalview" id="addMatchingQuestionModal" style="width:900px;height:600px">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" data-click="cancelAddQuestion">Cancel</a>
+                    <span data-role="view-title">Add Question</span>
+                    <!--<a data-role="button" data-align="right" data-click="addQuestion">Add</a>-->
+                    <!--<a data-role="button" data-align="right" data-click="uploadPhoto">Add</a>-->
+                    <a data-role="button" data-align="right" data-click="getMatching">Add</a>
+                </div>
+            </div>
+            <div data-role="content">
+				<input type="file" style="display:none" id="file" name="file" onchange="getQuestionImage(this)" />
+                <div id="qType" style="display:none"></div>
+                <div style="display:block;width:100%;height:60px;">
+                    <span class="fb_q_number"></span>
+                    <input type="text" id="fb_question" placeholder="Question" />
+                </div>
+                <div style="display:block;width:100%;min-height:340px;">
+					<div>
+						<input type="number" class="fb_q_grade" placeholder="Grade" style="width:25%;float:right;margin-right:4%" />
+					</div>
+                    <div id="questionsContainer" style="display:block;width:100%;min-height:340px;clear:both">
+                    </div>
+                    <div style="display:block;width:100%;height:20px;"></div>
+					<!--
+                    <div style="display:block;width:35%;height:340px;float:right;">
+                        <div>
+                            <input type="number" class="fb_q_grade" placeholder="Grade" />
+                        </div>
+                        <a data-role="button" style="display:block;width:100px;margin:0 auto;margin-top:20px;" container="questionImageContainer" data-click="getPhoto">Add Photo</a>
+                        <div id="questionImageContainer">
+                            <img id="questionImage" style="display:block;width:200px;height:160px;margin:0 auto;margin-top:0px;"/>
+                        </div>
+                        <div data-role="popover" id="imageSourcePopover" data-popup="{'width':'230','height':'130','direction':'right'}">
+                            <div data-role="view" class="popover-view">
+                                <a data-role="button" style="width:190px;margin:5px" source="CAMERA" container="questionImageContainer" data-click="getPhoto">CAMERA</a>
+                                <a data-role="button" style="width:190px;margin:5px" source="PHOTOLIBRARY" container="questionImageContainer" data-click="getPhoto">PHOTO LIBRARY</a>
+                            </div>
+                        </div>
+                    </div>
+					-->
+                </div>
+            </div>
+        </div>
+         <div data-role="modalview" id="editQuestionModal" style="width:700px;height:451px">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" onclick="Utils.closeModal(event)">Cancel</a>
+                    <span data-role="view-title">Edit Question</span>
+                    <!--<a data-role="button" data-align="right" data-click="addQuestion">Add</a>-->
+                    <a data-role="button" data-align="right" data-click="updatePhoto">Save</a>
+                </div>
+            </div>
+            <div data-role="content">
+                <div id="qID" style="display:none"></div>
+                <div id="qType" style="display:none"></div>
+                <div style="display:block;width:100%;height:60px;">
+                    <span class="fb_q_number"></span>
+                    <input type="text" id="fb_question" placeholder="Question" />
+                </div>
+                <div style="display:block;width:100%;height:340px;">
+                    <div id="questionsContainer" style="display:block;width:65%;height:340px;float:left;">
+                    </div>
+                    <div style="display:block;width:35%;height:340px;float:right;">
+                        <div>
+                            <input type="number" class="fb_q_grade" placeholder="Grade" />
+                        </div>
+                        <a data-role="button" href="#editImageSourcePopover" data-rel="popover" style="display:block;width:100px;height:40px;line-height:40px;margin:0 auto;margin-top:20px;">Add Photo</a>
+                        <div id="editQuestionImageContainer">
+                            <img id="editQuestionImage" style="display:block;width:200px;height:160px;margin:0 auto;margin-top:0px;"/>
+                        </div>
+                        <div data-role="popover" id="editImageSourcePopover" data-popup="{'width':'230','height':'130','direction':'right'}">
+                            <div data-role="view" class="popover-view">
+                                <a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="CAMERA" container="editQuestionImageContainer" data-click="getPhoto" dyn-title="source_camera">CAMERA</a>
+                                <a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="PHOTOLIBRARY" container="editQuestionImageContainer" data-click="getPhoto" dyn-title="source_library">PHOTO LIBRARY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-role="popover" id="editInputMethodPopover" data-popup="{'width':'230','height':'130'}">
+                    <div data-role="view" class="popover-view">
+                    	<a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="CAMERA" data-click="getChoicePhoto" dyn-title="source_camera">CAMERA</a>
+                        <a data-role="button" style="width:190px;height:40px;line-height:40px;margin:5px" source="PHOTOLIBRARY" data-click="getChoicePhoto" dyn-title="source_library">PHOTO LIBRARY</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="modalview" id="editMatchingQuestionModal" style="width:840px;height:600px">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" onclick="Utils.closeModal(event)">Cancel</a>
+                    <span data-role="view-title">Edit Question</span>
+                    <!--<a data-role="button" data-align="right" data-click="addQuestion">Add</a>-->
+                    <a data-role="button" data-align="right" data-click="updateMatchingPhoto">Save</a>
+                </div>
+            </div>
+            <div data-role="content">
+                <div id="qID" style="display:none"></div>
+                <div id="qType" style="display:none"></div>
+                <div style="display:block;width:100%;height:60px;">
+                    <span class="fb_q_number"></span>
+                    <input type="text" id="fb_question" placeholder="Question" />
+                </div>
+                <div style="display:block;width:100%;min-height:340px;">
+					<div>
+						<input type="number" class="fb_q_grade" placeholder="Grade" style="width:25%;float:right;margin-right:4%" />
+					</div>
+                    <div id="questionsContainer" style="display:block;width:100%;min-height:340px;clear:both;">
+                    </div>
+                    <div style="display:block;width:100%;height:20px;"></div>
+					<!--
+                    <div style="display:block;width:35%;height:340px;float:right;">
+                        <a data-role="button" style="display:block;width:100px;margin:0 auto;margin-top:20px;" container="editQuestionImageContainer" data-click="getPhoto">Add Photo</a>
+                        <div id="editQuestionImageContainer">
+                            <img id="editQuestionImage" style="display:block;width:200px;height:160px;margin:0 auto;margin-top:0px;"/>
+                        </div>
+                        <div data-role="popover" id="editImageSourcePopover" data-popup="{'width':'230','height':'130','direction':'right'}">
+                            <div data-role="view" class="popover-view">
+                                <a data-role="button" style="width:190px;margin:5px" source="CAMERA" container="editQuestionImageContainer" data-click="getPhoto">CAMERA</a>
+                                <a data-role="button" style="width:190px;margin:5px" source="PHOTOLIBRARY" container="editQuestionImageContainer" data-click="getPhoto">PHOTO LIBRARY</a>
+                            </div>
+                        </div>
+                    </div>
+					-->
+                </div>
+            </div>
+        </div>
+        <!--------------------------------------------------------------->
+        <!-------------------------Documents----------------------------->
+        <!--------------------------------------------------------------->
+                            
+          <div data-role="view" id="documents" data-show="getDocuments" data-title="DOCUMENTS" data-layout="mainLayout" drawer-enabled>
+            <div data-role="content">
+                <ul data-role="listview" data-style="inset" id="documents-list">
+                </ul>
+            </div>
+            <div data-role="footer">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="right" id="editDocumentsBtn" data-click="editDocuments" isEdit="true" style="color:black;">Edit</a>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------------------------->
+        <!--------------------------- Notes View ---------------------->
+        <!------------------------------------------------------------->
+        <div data-role="view" id="noteUnitsView" data-title="Select Unit" data-layout="detailsLayout" data-init="initNoteUnitsView" data-show="showNoteUnitsView">
+            <div data-role="content">
+                <div class="topActions">
+
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="noteUnitsList" data-source="unitsDS" data-template="noteUnitsTemplate" data-auto-bind="false"></ul>
+                </div>
+            </div>
+            <script id="noteUnitsTemplate" type="text/x-kendo-template">
+                <a class="container" onClick="Utils.navigate('\#notesView?unitID=#=ID#&unit=#=Name#')">
+                    <div class="unitTitle flex">#:Name#</div>
+                </a>
+            </script>
+        </div>
+        <div data-role="view" id="notesView" data-layout="mainLayout" data-title="Share Content" data-init="initNotesView" data-show="showNotesView" drawer-enabled>
+            <div data-role="content">
+                <div class="topActions">
+                    <div class="title flex">
+                        Unit:&nbsp;<span class="currentUnit"></span>
+                    </div>
+                    <a data-role="button" class="action" onclick="createNewExam(event)">Create Notes</a>
+                   <!-- <a data-role="button" class="action" onclick="getBroadcastPictureFromTemplate(event)">Get From Template</a> -->
+                </div>
+                <div class="content">
+                    <ul data-role="listview" id="notesList"></ul>
+                </div>
+            </div>
+            <script id="notesTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="detailsContainer">
+                        <div class="image" background-image="#=Utils.getPicturePath(Thumbnail)#"></div>
+                        <div class="details flex">
+                            <div class="title">#=Title#</div>
+                            <div class="date">#=Date#</div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a data-role="button" class="action" onclick="onclickStartnotes(event, #:ID#)">Show Note</a>
+                    </div>
+                </div>
+            </script>
+        </div>
+        <!------------------------------------------------------------->
+        <!---------- LAYOUTS, POPOVERS, MODALS AND TEMPLATES ---------->
+        <!------------------------------------------------------------->
+        <div data-role="layout" data-id="mainLayout">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" class="menuButton" onclick="openDrawer(event)"></a>
+                    <a data-role="button" data-align="left" class="homeButton" onclick="Utils.navigate('#homeView')"></a>
+                    <a data-role="button" data-align="left" class="homeButton" onclick="navigateStudentsToHome()">S</a>
+                    <span data-role="view-title"></span>
+                    <a data-role="button" class="right moreButton" data-align="right" onclick="Utils.openPopover('#menuOptionsPopover', $(event.target))"></a>
+                    <a data-role="button" class="right alertButton" data-align="right" onclick="Utils.openModal('#participationModal')"></a>
+                    <a data-role="button" class="right eyeButton" data-align="right" status="off" onclick="eyesOnTeacher(event)"></a>
+                    <a data-role="button" class="right presentStudentsButton" data-align="right" onclick="Utils.openPopover('#attendanceListPopover', $(event.target))"></a>
+                </div>
+            </div>
+            <div data-role="footer" class="footer">
+                <div class="currentScreenContainer flex">
+                    Current Screen:&nbsp;
+                    <div class="currentScreen"></div>
+                </div>
+                <div class="studentsTotalContainer flex">
+                    Online Students:&nbsp;
+                    <div class="studentsTotal"></div>
+                </div>
+            </div>
+            <div data-role="popover" id="menuOptionsPopover" data-popup="{'width':'300px'}">
+                <div data-role="view" id="menuOptionsView" data-init="initMenuOptionsView">
+                    <div class="content">
+                        <div class="form">
+                            <div class="formButtons">
+                                <a data-role="button" class="formButton" onclick="goToClasses(event)">Classes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-role="popover" id="attendanceListPopover" data-popup="{'width':'360','height':'460'}">
+                <div data-role="view" data-show="onShowAttendanceListPopover" data-title="Attendance">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title"></span>
+                        </div>
+                    </div>
+                    <ul id="attendanceListTabs">
+                        <li style="width:100px" dyn-title="tch_all_students_tab">All</li>
+                        <li style="width:100px" dyn-title="tch_present_students_tab">Present</li>
+                    </ul>
+                    <div class="content">
+                        <ul data-role="listview" class="popoverAttendanceList" data-source="studentsDS" data-template="studentsStatusTemplate"></ul>
+                        <ul data-role="listview" class="popoverAttendanceList" data-source="presentStudentsDS" data-template="studentsStatusTemplate" style="display:none"></ul>
+                    </div>
+                </div>
+                <script id="studentsStatusTemplate" type="x-kendo-template">
+                    <div class="studentContainer flex">
+                        <div style="color:#=isPresent ? 'limegreen' : 'firebrick'#">#:FullEName#</div>
+                    </div>
+                </script>
+            </div>
+        </div>
+        <div data-role="layout" data-id="detailsLayout">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" class="backButton" onclick="Utils.navigate('#:back')"></a>
+                    <a data-role="button" data-align="left" class="homeButton" onclick="Utils.navigate('#homeView')"></a>
+                    <a data-role="button" data-align="left" class="homeButton" onclick="navigateStudentsToHome()">S</a>
+                    <span data-role="view-title"></span>
+                    <a data-role="button" class="right moreButton" data-align="right" onclick="Utils.openPopover('#menuOptionsPopover', $(event.target))"></a>
+                    <a data-role="button" class="right alertButton" data-align="right" onclick="Utils.openModal('#participationModal')"></a>
+                    <a data-role="button" class="right eyeButton" data-align="right" status="off" onclick="eyesOnTeacher(event)"></a>
+                    <a data-role="button" class="right presentStudentsButton" data-align="right" onclick="Utils.openPopover('#attendanceListPopover', $(event.target))"></a>
+                </div>
+            </div>
+            <div data-role="footer" class="footer">
+                <div class="currentScreenContainer flex">
+                    Current Screen:&nbsp;
+                    <div class="currentScreen"></div>
+                </div>
+                <div class="studentsTotalContainer flex">
+                    Online Students:&nbsp;
+                    <div class="studentsTotal"></div>
+                </div>
+            </div>
+        </div>
+        <div data-role="modalview" id="participationModal" style="width:70%;height:80%;" data-title="Participation">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <ul data-role="listview" id="studentsParticipationList" data-source="participatingStudentsDS" data-template="participatingStudentsTemplate"></ul>
+        </div>
+        <div data-role="modalview" id="scribbleResultModal" style="width:70%;height:80%;" data-title="">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <div class="image"></div>
+            <div data-role="footer">
+                <div data-role="navbar">
+                    <div class="scribbleGradeContainer">
+                        <div class="scribbleGradeLabel flex">Grade</div>
+                        <input class="flex" type="number" id="txtScribbleGrade" value="0" />
+                        <a data-role="button" id="btnGradeScribble" onclick="gradeScribble(event)">Save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="modalview" id="youtubeModal" style="width:90%;height:90%;" data-title="Youtube">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <div data-role="header" class="searchContainer">
+                <div class="searchFieldContainer">
+                    <input type="text" id="txtSearchYoutube" class="searchField flex" placeholder="Search Youtube" />
+                </div>
+                <a data-role="button" class="searchButton" onclick="searchYoutubeVideos(event)">Search</a>
+            </div>
+            <div id="youtubeVideosList" data-role="listview" data-source="youtubeVideosDS" data-template="youtubeVideosTemplate" data-bound="youtubeListBound"></div>
+            <script id="youtubeVideosTemplate" type="text/x-kendo-template">
+                <div class="container">
+                    <div class="thumbnail" background-image="#=snippet.thumbnails.default.url#"></div>
+                    <div class="titleContainer">
+                        <div class="title">#=snippet.title#</div>
+                    </div>
+                    <div class="actionsContainer">
+                        <a data-role="button" class="action view" onclick="viewYoutubeVideo('#=id.videoId#')"></a>
+                        <a data-role="button" class="action share" onclick="shareYoutubeVideo('http://www.youtube.com/embed/#=id.videoId#')"></a>
+                    </div>
+                </div>
+            </script>
+        </div>
+        <div data-role="modalview" id="youtubePlayer" style="width:80%;height:90%">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <!--<iframe width="100%" height="100%" style="width:100%;height:100%"></iframe>-->
+            <video width="100%" height="100%" style="width:100%;height:100%"></video>
+        </div>
+         <div data-role="modalview" id="screenShareModal" style="width:800px;height:640px" data-zoom="true">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" onclick="Utils.closeModal(event)">Close</a>
+                    <span data-role="view-title">Student's Screen</span>
+                </div>
+            </div>
+            <div data-role="content">
+                <div id="studentScreenContainer" style="width:100%;height:100%;background:black;">
+                    <img id="studentScreen"/>
+                </div>
+            </div>
+        </div>
+        <script id="subjectsTemplate" type="text/x-kendo-template">
+            <td class="subject">
+                <div id="subjectID" class="hidden">#:ID#</div>
+                <div id="sectionID" class="hidden">#:SectionID#</div>
+                <div class="subjectTitle flex center">#:AName#</div>
+                <div class="subjectDetails flex">
+                    <div>
+                        <div class="subjectSection flex">#:SectionName#</div>
+                        <div class="subjectTeacher flex">#=TeacherA ? TeacherA : ""#</div>
+                        <div class="subjectTime flex">#=moment(From, 'hh:mm').format('hh:mm A') + " - " + moment(To, 'hh:mm').format('hh:mm A')#</div>
+                    </div>
+                </div>
+            </td>
+        </script>
+        <script id="participatingStudentsTemplate" type="text/x-kendo-template">
+            <div class="studentContainer flex">
+                <div class="studentName">#:Name#</div>
+            </div>
+            <div class="actionsContainer flex center">
+                <a data-role="button" class="action" onclick="clearStudentParticipation(event, #:ID#)">Delete</a>
+            </div>
+            <div class="countContainer flex center">
+                <div class="count flex center">#:Count#</div>
+            </div>
+        </script>
+        <script id="scribbleContentsTemplate" type="text/x-kendo-template">
+            <div class="container">
+                <div class="imageContainer">
+                    <div class="image" background-image="#=Utils.getPicturePath(Path)#"></div>
+                </div>
+                <div class="actions">
+                    <a data-role="button" class="action" onclick="onclickStartScribble(event, #:ID#)">Start Scribble</a>
+                </div>
+            </div>
+        </script>
+        <div data-role="modalview" id="scribbleTemplatesModal" style="width:90%;height:90%" data-title="Templates">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                    <span data-role="view-title"></span>
+                    <a data-role="button" onclick="startScribbleFromTemplate(event)" data-align="right">Start</a>
+                </div>
+            </div>
+            <div id="scribbleTemplatesScrollView" data-role="scrollview" data-source="scribbleTemplatesDS" data-template="scribbleTemplatesTemplate" data-items-per-page="4" data-refresh="onRefreshScribbleTemplate" data-changing="onChangingScribbleTemplate" data-content-height="94%"></div>
+            <script id="scribbleTemplatesTemplate" type="text/x-kendo-template">
+                <div style="display:block;width:100%;height:100%;overflow:hidden" onclick="selectScribbleTemplate(event)">
+                    # for (var i = 0; i < data.length; i++) { #
+                        <div class="scribbleTemplate #=data[i].isSelected ? 'selected' : ''#">
+                            <span id="itemID" style="display:none">#:data[i].ID#</span>
+                            <div class="templateImage" background-image="#=Utils.getPicturePath(data[i].Path)#"></div>
+                        </div>
+                    # } #
+                </div>
+            </script>
+        </div>
+       <div data-role="modalview" id="questionDetailsModal" style="width:80%;height:600px;">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" onclick="Utils.closeModal(event)" data-align="left">Close</a>
+                    <span data-role="view-title">QUESTION DETAILS</span>
+                </div>
+            </div>
+            <div style="margin-top:20px;margin-bottom:20px;">
+                <span class="questionNumber" style="display:block;float:left;margin-left:10px;font-size:1.2rem;"></span><span class="question" style="display:block;float:left;margin-left;0px;font-size:1.2rem;"></span><br/><br/>
+                <span class="answers" style="clear:both;display:block;margin-left:20px;margin-right:20px;font-size:1.2rem;"></span>
+                <table id="questionAnswers" style="width:94%;margin-left:3%;"></table>
+            </div>
+            <div data-role="popover" id="questionImageDetailsPopover" data-popup="{'width':'400','height':'400','direction':'left'}">
+                <div data-role="view" class="popover-view">
+                    <div class="detailedImage"></div>
+                </div>
+            </div>
+        </div>
+        <div data-role="modalview" id="studentAnswerModal" style="width:700px;height:500px">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left" onclick="Utils.closeModal(event)">Close</a>
+                    <span data-role="view-title">Student's Answer</span>
+                </div>
+            </div>
+            <div data-role="content">
+                <div style="margin-top:20px;margin-bottom:20px;">
+                	<div data-role="scroller"></div>
+                	<table id="studentAnswerTable" style="width:94%;margin-left:3%;"></table>
+                </div>
+            </div>
+            <div data-role="popover" id="answerImageDetailsPopover" data-popup="{'width':'400','height':'400','direction':'left'}">
+                <div data-role="view" class="popover-view">
+                    <div class="detailedImage"></div>
+                </div>
+            </div>
+        </div>
+         <div data-role="modalview" id="sharedExamResultsModal" style="width:700px;height:600px;">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Results</span>
+                    <a data-role="button" data-click="unshareExamResults" data-align="right">Close</a>
+                </div>
+            </div>
+            <div data-role="content">
+                <div id="resultsChart"></div>
+            </div>
+        </div>
+                             
+         <script type="text/x-kento-template" id="examStudentsListTemplate">
+            <div class="studentListItem" id="#:ID#">
+            	<div class="studentContainer">
+            		<div class="studentStatus" style="background-image:url(#= isPresent ? "images/icons/green.png" : "images/icons/red.png" #)"></div>
+            		<div class="studentName">#:FullEName#</div>
+            		<div class="checkbox checked"></div>
+            	</div>
+            </div>
+        </script>
+        <script src="scripts/libs/fastclick.js"></script>
+        <script src="scripts/libs/moment.js"></script>
+        <script src="scripts/libs/socketio.js"></script>
+        <script src="scripts/Utils.js"></script>
+        <script src="scripts/DB.js"></script>
+        <script src="scripts/WebService.js"></script>
+        <script src="scripts/teacher.js"></script>
+        <!-- HELPING LIBRARIES -->
+        <script src="scripts/libs/CanvasPlugin.js"></script>
+        <script src="scripts/libs/KeyboardFix.js"></script>
+        <script src="scripts/libs/jquery.dotdotdot.min.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,2317 @@
+.km-root .km-pane .km-view .km-shareIcon{
+	background-size: 100% 100%;
+	-webkit-background-clip: border-box;
+	background-color: currentcolor;
+}
+.km-buttongroup>.km-button.km-state-active
+{
+    background: #1E8BDE;
+    color: white;
+}
+
+.eyeButton[status=on]:before,
+.alertButton[status=on]:before
+{
+    color: firebrick;
+}
+
+.formButton
+{
+    background: #1E8BDE !important;
+    color: white !important;
+    font-size: 140%;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+.header
+{
+    display: table;
+    width: 100%;
+    min-height: 60px;
+    font-size: 140%;
+    table-layout: fixed;
+}
+.header .title,
+.header .date
+{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.footer
+{
+    display: block;
+    width: 100%;
+    height: 40px;
+    font-size: 140%;
+    font-weight: bold;
+    color: white;
+}
+.footer .currentScreenContainer
+{
+    float: left;
+    text-align: left;
+    height: 100%;
+    padding: 0px 10px;
+}
+.footer .studentsTotalContainer
+{
+    float: right;
+    text-align: right;
+    height: 100%;
+    padding: 0px 10px;
+}
+
+.km-scrollview .km-virtual-page
+{
+    height: 100%;
+}
+
+#studentsParticipationList li
+{
+    border-bottom: 1px solid #AAA;
+}
+#studentsParticipationList .studentContainer
+{
+    height: 50px;
+    float: left;
+    padding: 0px 10px;
+}
+#studentsParticipationList .studentContainer .studentName
+{
+    font-size: 140%;
+}
+#studentsParticipationList .countContainer
+{
+    height: 50px;
+    width: 50px;
+    float: right;
+}
+#studentsParticipationList .countContainer .count
+{
+    display: block;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    background: firebrick;
+    color: white;
+}
+#studentsParticipationList .actionsContainer
+{
+    height: 50px;
+    float: right;
+    padding: 0px 10px;
+}
+#studentsParticipationList .actionsContainer .action
+{
+    display: block;
+    height: 40px;
+    background: white;
+    color: firebrick;
+    box-shadow: none;
+    border: 1px solid #1E8BDE;
+}
+
+/*============= Subjects View =============*/
+#subjectsContainer
+{
+    width: 100%;
+    border-spacing: 15px;
+}
+#subjectsContainer .subject
+{
+    display: table-cell !important;
+    width: 33.3%;
+    background: white;
+    vertical-align: top;
+    padding: 0px !important;
+    margin: 0px;
+    border-radius: 10px;
+    text-align: left;
+    overflow: hidden !important;
+}
+#subjectsContainer .subject .km-text
+{
+    display: block !important;
+    overflow: hidden !important;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+#subjectsContainer .subject .subjectTitle
+{
+    height: 80px;
+    font-size: 140%;
+    font-weight: bold;
+    padding: 0px 5%;
+    background: lavender;
+}
+#subjectsContainer .subject .subjectDetails > div
+{
+    display: block;
+    width: 90%;
+    margin: 5%;
+}
+#subjectsContainer .subject .subjectSection
+{
+    min-height: 60px;
+    font-size: 120%;
+    font-weight: bold;
+}
+#subjectsContainer .subject .subjectTeacher
+{
+    height: 40px;
+    font-size: 100%;
+    font-weight: bold;
+}
+#subjectsContainer .subject .subjectTime
+{
+    height: 40px;
+    font-size: 100%;
+    font-weight: bold;
+}
+#subjectsContainer .subject.km-state-active
+{
+    background: lavender;
+    color: #333;
+}
+/*============= Subjects View =============*/
+
+/*============= Home View =============*/
+#homeView #menuContainer
+{
+    display: block;
+    width: 75%;
+    float: left;
+}
+#homeView #studentsSideListContainer
+{
+    display: block;
+    width: 25%;
+    float: left;
+    border-left: 1px solid #AAA;
+}
+#studentsSideList li .studentContainer
+{
+    min-height: 40px;
+    font-size: 120%;
+    padding: 5px 10px;
+}
+#studentsSideList li .studentContainer .studentName
+{
+    display: inline-block;
+    width: auto;
+    max-width: 75%;
+}
+#studentsSideList li .studentContainer .attendanceStatus
+{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    border-radius: 100%;
+    background: firebrick;
+}
+
+#studentsSideList li .studentContainer.present .attendanceStatus
+{
+    background: limegreen;
+}
+#mainMenu
+{
+    width: 100%;
+    border-spacing: 15px;
+    transition: opacity 0.2s ease;
+    -webkit-transition: opacity 0.2s ease;
+}
+#mainMenu .menuItem
+{
+    display: table-cell !important;
+    width: 33.3%;
+    height: auto;
+    background: firebrick;
+    vertical-align: top;
+    padding: 0px !important;
+    margin: 0px;
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+}
+#mainMenu .menuItem .km-text
+{
+    display: block !important;
+}
+#mainMenu .menuItem.km-state-active
+{
+    color: indianred;
+    background: maroon;
+}
+#mainMenu .menuItem .icon
+{
+    display: block;
+    width: 100%;
+    height: 140px;
+    -webkit-mask-image: url();
+    -webkit-mask-size: auto 80%;
+    -webkit-mask-position: bottom center;
+    -webkit-mask-repeat: no-repeat;
+    background: currentColor;
+}
+#mainMenu .menuItem .title
+{
+    width: 100%;
+    height: 60px;
+    font-size: 140%;
+}
+#mainMenu .menuItem .icon.attendance
+{
+    -webkit-mask-image: url(../images/icons/menu/attendance.png);
+}
+#mainMenu .menuItem .icon.polls
+{
+    -webkit-mask-image: url(../images/icons/menu/polls.png);
+}
+#mainMenu .menuItem .icon.shareLinks
+{
+    -webkit-mask-image: url(../images/icons/menu/shareLinks.png);
+}
+#mainMenu .menuItem .icon.scribble
+{
+    -webkit-mask-image: url(../images/icons/menu/scribble.png);
+}
+#mainMenu .menuItem .icon.screenBroadcast
+{
+    -webkit-mask-image: url(../images/icons/menu/screenBroadcast.png);
+}
+#mainMenu .menuItem .icon.eyesOnTeacher
+{
+    -webkit-mask-image: url(../images/icons/menu/eyesOnTeacher.png);
+}
+#mainMenu .menuItem .icon.shareYoutube
+{
+    -webkit-mask-image: url(../images/icons/menu/youtubeIcon.png);
+}
+#mainMenu .menuItem .icon.presentations
+{
+    -webkit-mask-image: url(../images/icons/menu/presentationsIcon.png);
+}
+#mainMenu .menuItem .icon.exams
+{
+    -webkit-mask-image: url(../images/icons/menu/examsIcon.png);
+}#mainMenu .menuItem .icon.documents
+{
+    -webkit-mask-image: url(../images/icons/menu/documentsIcon.png);
+}#mainMenu .menuItem .icon.notes
+{
+    -webkit-mask-image: url(../images/icons/menu/notesIcon.png);
+}
+/*============= Home View =============*/
+
+/*============= Attendance View =============*/
+#attendanceList
+{
+    overflow: hidden;
+}
+#attendanceList li
+{
+    display: block;
+    width: 22%;
+    margin: 0px;
+    float: left;
+    margin-left: 2.35%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #AAA;
+    box-shadow: none;
+}
+#attendanceList li .container
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#attendanceList li .actions
+{
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: lavender;
+}
+#attendanceList li .action
+{
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+#attendanceList li .action.notes
+{
+    float: left;
+}
+#attendanceList li .action.studentStatus
+{
+    float: right;
+}
+#attendanceList li .action.notes:after
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-image: url(../images/icons/noteIcon.png);
+    -webkit-mask-size: auto 80%;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    background: currentColor;
+    content: "";
+}
+#attendanceList li .profilePictureContainer
+{
+    display: block;
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+#attendanceList li .profilePicture
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#attendanceList li .studentStatus
+{
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 5px;
+    transition: background 0.1s ease;
+    -webkit-transition: background 0.1s ease;
+}
+#attendanceList li .online .studentStatus
+{
+    background: limegreen;
+}
+#attendanceList li .offline .studentStatus
+{
+    background: firebrick;
+}
+#attendanceList li .studentName
+{
+    width: 100%;
+    height: 60px;
+    font-size: 120%;
+    font-weight: bold;
+    color: #333;
+    border-top: 1px solid #AAA;
+    padding: 0px 10px;
+    background: lavender;
+}
+
+#attendanceNoteTextArea
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 140%;
+}
+/*============= Attendance View =============*/
+
+/*============= Share Links View =============*/
+#shareLinksList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#shareLinksList li .container:after
+{
+    display: none;
+}
+#shareLinksList li .container .linkTitle
+{
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+#shareLinksList li .container .linkURL
+{
+    height: 100%;
+    font-size: 120%;
+    float: right;
+    color: #666;
+    padding: 0px 10px;
+}
+/*============= Share Links View =============*/
+
+/*============= Screen Broadcast View =============*/
+#broadcastUnitsList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#broadcastUnitsList li .container:after
+{
+    display: none;
+}
+#broadcastUnitsList li .container .unitTitle
+{
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+
+#broadcastsList
+{
+    overflow: hidden;
+}
+#broadcastsList li
+{
+    display: block;
+    width: 32%;
+    margin: 0px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #AAA;
+    box-shadow: none;
+}
+#broadcastsList li .container
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#broadcastsList li .imageContainer
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#broadcastsList li .imageContainer .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+}
+#broadcastsList li .actions
+{
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: #1E8BDE;
+}
+#broadcastsList li .action
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 140%;
+    background: inherit;
+}
+/*============= Screen Broadcast View =============*/
+
+/*============= Screen Broadcast Details View =============*/
+#broadcastCanvasContainer
+{
+    display: block;
+    width: 80%;
+    height: 100%;
+    background-color: #222;
+    float: left;
+}
+#broadcastCanvas
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    -webkit-transition: opacity 0.2s ease;
+}
+.drawingTools
+{
+    display: block;
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+.drawingToolsList .drawingTool
+{
+    display: block;
+    width: 100%;
+    background: white;
+    position: relative;
+}
+.drawingToolsList .drawingTool:before
+{
+    display: block;
+    width: 8px;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0px;
+    background: firebrick;
+    opacity: 0;
+    content: "";
+    transition: opacity 0.1s ease;
+    -webkit-transition: opacity 0.1s ease;
+}
+.drawingToolsList .drawingTool.active:before
+{
+    opacity: 1;
+}
+.drawingToolsList .drawingTool:after
+{
+    display: block;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    -webkit-mask-size: auto 80%;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-image: url(../images/icons/pencilIcon.png);
+    background: currentColor;
+    content: "";
+}
+.drawingToolsList .drawingTool[color=eraser]:after
+{
+    -webkit-mask-image: url(../images/icons/eraserIcon.png);
+}
+.drawingActions
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    background: firebrick;
+}
+.drawingActions .action
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: 0px;
+    color: white;
+    background: inherit;
+    font-size: 140%;
+}
+/*============= Screen Broadcast Details View =============*/
+
+/*============= Sribbles View =============*/
+#scribbleUnitsList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#scribbleUnitsList li .container:after
+{
+    display: none;
+}
+#scribbleUnitsList li .container .unitTitle
+{
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+
+#scribblesList
+{
+    overflow: hidden;
+}
+#scribblesList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#scribblesList li .container:after
+{
+    display: none;
+}
+#scribblesList li .scribbleTitle
+{
+    max-width: 50%;
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+#scribblesList li .scribbleDate
+{
+    max-width: 50%;
+    height: 100%;
+    font-size: 120%;
+    float: right;
+    color: #666;
+    padding: 0px 10px;
+}
+/*============= Sribbles View =============*/
+
+/*============= Add Scribble View =============*/
+#scribbleContentsList li
+{
+    display: block;
+    width: 32%;
+    margin: 0px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #AAA;
+    box-shadow: none;
+}
+#scribbleContentsList li .container
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#scribbleContentsList li .imageContainer
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#scribbleContentsList li .imageContainer .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+}
+#scribbleContentsList li .actions
+{
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: #1E8BDE;
+}
+#scribbleContentsList li .action
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 140%;
+    background: inherit;
+}
+/*============= Add Scribble View =============*/
+
+/*============= Scribble Template Modal View =============*/
+#scribbleTemplatesScrollView .scribbleTemplate
+{
+    display: block;
+    width: 44%;
+    height: 44%;
+    margin: 2% 3%;
+    float: left;
+    border: 1px solid #1E8BDE;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    -webkit-transition: opacity 0.2s ease;
+    position: relative;
+}
+#scribbleTemplatesScrollView .scribbleTemplate.selected .templateImage
+{
+    opacity: 0.7 !important;
+}
+#scribbleTemplatesScrollView .scribbleTemplate.selected:after
+{
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: #1E8BDE;
+    color: white;
+    border-radius: 100%;
+    background-image: url(../images/icons/checkIcon.png);
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+#scribbleTemplatesScrollView .templateImage
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.2s ease;
+    -webkit-transition: opacity 0.2s ease;
+}
+/*============= Scribble Template Modal View =============*/
+
+/*============= Sribble Details View =============*/
+#scribbleResultsList li
+{
+    display: block;
+    width: 32%;
+    margin: 0px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #AAA;
+    box-shadow: none;
+}
+#scribbleResultsList li .container
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#scribbleResultsList li .imageContainer
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#scribbleResultsList li .imageContainer .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+}
+#scribbleResultsList li .actions
+{
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: #1E8BDE;
+}
+#scribbleResultsList li .action
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 140%;
+    background: inherit;
+}
+#scribbleResultsList li .studentName
+{
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: lavender;
+    color: #333;
+    font-size: 140%;
+}
+
+#scribbleResultModal .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+}
+#scribbleResultModal .km-footer
+{
+    display: block;
+    height: 60px;
+    background: #1E8BDE;
+    color: white;
+}
+#scribbleResultModal .km-footer .km-navbar
+{
+    display: block;
+    height: inherit;
+    background: inherit;
+    color: inherit;
+}
+#scribbleResultModal .km-footer .km-navbar .km-view-title
+{
+    height: inherit;
+}
+#scribbleResultModal .km-footer .scribbleGradeContainer
+{
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    float: right;
+    margin: 0px 10px;
+}
+#scribbleResultModal .km-footer .scribbleGradeContainer .scribbleGradeLabel
+{
+    height: 100%;
+    float: left;
+    color: white;
+}
+#scribbleResultModal .km-footer .scribbleGradeContainer #txtScribbleGrade
+{
+    height: 40px;
+    max-width: 200px;
+    float: left;
+    margin: 10px 10px;
+    color: #333;
+    background: white;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+    -webkit-appearance: none;
+}
+#scribbleResultModal .km-footer .scribbleGradeContainer #btnGradeScribble
+{
+    display: block;
+    height: 40px;
+    max-width: 200px;
+    float: left;
+    margin: 8px 0px;
+    padding: 0px 10px;
+    color: white;
+    background: indianred;
+    border: none;
+    border-radius: 0px;
+}
+/*============= Sribble Details View =============*/
+
+/*============= Polls View =============*/
+#pollUnitsList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#pollUnitsList li .container:after
+{
+    display: none;
+}
+#pollUnitsList li .container .unitTitle
+{
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+
+#pollsList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#pollsList li .container:after
+{
+    display: none;
+}
+#pollsList li .container .pollTitle
+{
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+/*============= Polls View =============*/
+
+/*============= Edit Poll View =============*/
+#editPollView .form
+{
+    margin: 10px auto;
+}
+#editPollView #pollChoicesList
+{
+    width: 90%;
+    margin: 0px auto;
+}
+#editPollView #pollChoicesList li
+{
+    /*
+    height: 90px;
+    border-bottom: 1px solid #1E8BDE;
+    margin-top: 10px;
+    */
+    border: 1px solid #1E8BDE;
+    display: inline-block;
+    width: 23%;
+    margin: 5px 1%;
+}
+#editPollView #pollChoicesList .container
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#editPollView #pollChoicesList .choiceContainer
+{
+    display: block;
+    width: auto;
+    height: 80px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+#editPollView #pollChoicesList .choiceContainer .form
+{
+    width: 100%;
+    height: 60px;
+    margin: 10px 0px;
+    position: relative;
+}
+#editPollView #pollChoicesList .choiceContainer .formInput
+{
+    width: 100%;
+    height: 90%;
+    top: 5%;
+    margin: 0px;
+    padding: 0px 10px;
+}
+#editPollView #pollChoicesList .choiceImageContainer
+{
+    display: block;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 80px;
+    bottom: 80px;
+}
+#editPollView #pollChoicesList .choiceImage
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#editPollView #pollChoicesList .choiceActions
+{
+    display: block;
+    width: 80px;
+    height: auto;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 80px;
+}
+#editPollView #pollChoicesList .action
+{
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    background: #1E8BDE;
+    color: white;
+    border-radius: 0px;
+}
+#editPollView #pollChoicesList .action.check
+{
+    background: #FFF;
+    border: 1px solid #1E8BDE;
+    color: #1E8BDE;
+}
+#editPollView #pollChoicesList .action:after
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: "";
+    -webkit-mask-size: auto 60%;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    background: currentColor;
+}
+#editPollView #pollChoicesList .action.delete
+{
+    background: indianred;
+}
+#editPollView #pollChoicesList .action.delete:after
+{
+    -webkit-mask-image: url(../images/icons/menu/deleteIcon.png);
+}
+#editPollView #pollChoicesList .action.edit:after
+{
+    -webkit-mask-image: url(../images/icons/menu/editIcon.png);
+}
+/*============= Edit Poll View =============*/
+
+/*============= Poll Details View =============*/
+#pollDetailsView .form
+{
+    margin: 10px auto;
+}
+#pollDetailsView #pollChoicesList
+{
+    width: 90%;
+    margin: 0px auto;
+}
+#pollDetailsView #pollChoicesList li
+{
+    height: 90px;
+    border-bottom: 1px solid #AAA;
+    margin-top: 10px;
+}
+#pollDetailsView #pollChoicesList .container
+{
+    display: block;
+    width: 100%;
+    height: 80px;
+    position: relative;
+}
+#pollDetailsView #pollChoicesList .choiceContainer
+{
+    display: block;
+    width: auto;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 110px;
+    right: 10px;
+    overflow: hidden;
+}
+#pollDetailsView #pollChoicesList .choiceContainer .form
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+#pollDetailsView #pollChoicesList .choiceContainer .formInput
+{
+    width: 100%;
+    top: 17px;
+    margin: 0px;
+}
+#pollDetailsView #pollChoicesList .choiceImageContainer
+{
+    display: block;
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+#pollDetailsView #pollChoicesList .choiceImage
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#pollDetailsView .topActions .action.run
+{
+    background: limegreen;
+}
+/*============= Poll Details View =============*/
+
+/*============= Poll Results View =============*/
+#pollResultsView .form
+{
+    margin: 10px auto;
+}
+/*============= Poll Results View =============*/
+
+/*============= Poll Result Details View =============*/
+#pollResultDetailsView .form
+{
+    margin: 10px auto;
+}
+#pollResultDetailsView #pollResultTables
+{
+    width: 94%;
+    margin: 0px auto;
+}
+#pollResultDetailsView #pollResultTables thead th
+{
+    height: 50px;
+    background: #1E8BDE;
+    color: white;
+    position: relative;
+    font-size: 120%;
+}
+#pollResultDetailsView #pollResultTables thead th:not(:last-child):after
+{
+    display: block;
+    height: 90%;
+    width: 1px;
+    background: white;
+    position: absolute;
+    right: -1px;
+    top: 5%;
+    z-index: 9999;
+    content: "";
+}
+#pollResultDetailsView #pollResultTables tbody
+{
+    display: block;
+    border: 1px solid #AAA;
+}
+#pollResultDetailsView #pollResultTables tbody td:not(:last-child) .choiceStudents
+{
+    border-right: 1px solid #AAA;
+}
+#pollResultDetailsView #pollResultTables .choiceStudents .container
+{
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+#pollResultDetailsView #pollResultTables .student
+{
+    width: 100%;
+    padding: 10px;
+}
+/*============= Poll Result Details View =============*/
+
+/*============= Attendance Popover View =============*/
+#attendanceListPopover .popoverAttendanceList .studentContainer
+{
+    min-height: 40px;
+    font-size: 120%;
+    padding: 5px 10px;
+}
+#attendanceListPopover #attendanceListTabs
+{
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    overflow: hidden;
+}
+#attendanceListPopover #attendanceListTabs .km-button
+{
+    width: 50% !important;
+    height: 40px;
+    float: left;
+    background: darkgrey;
+    color: white;
+    font-size: 120%;
+}
+#attendanceListPopover #attendanceListTabs .km-button.km-state-active
+{
+    background: #1E8BDE;
+    filter: brightness(100%);
+    -webkit-filter: brightness(100%);
+}
+/*============= Attendance Popover View =============*/
+
+/*============= Menu Options View =============*/
+#menuOptionsView ol.km-pages
+{
+    display: none;
+}
+#menuOptionsView .content
+{
+    display: block;
+    width: 100%;
+    float: left;
+}
+/*============= Menu Options View =============*/
+
+/*============= Side Menu =============*/
+.km-listview.sideMenu li
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #1E8BDE !important;
+    color: #333;
+    margin: 0px;
+    font-size: 120%;
+}
+.km-listview.sideMenu li .km-listview-link
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    padding: 0px 10px;
+    margin: 0px;
+}
+/*============= Side Menu =============*/
+
+/*============= Youtube Modal =============*/
+#youtubeModal .searchContainer
+{
+    display: block;
+    width: 100%;
+    height: 80px;
+    /*background: #1E6BDE;*/
+    background: firebrick;
+    position: relative;
+}
+#youtubeModal .searchFieldContainer
+{
+    display: block;
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 5%;
+    right: 22%;
+    top: 15%;
+    bottom: 15%;
+}
+#youtubeModal .searchField
+{
+    width: 100%;
+    height: 100%;
+    padding: 0px 10px;
+    font-size: 120%;
+    border: none;
+    box-shadow: none;
+}
+#youtubeModal .searchButton
+{
+    width: 15%;
+    height: 70%;
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    bottom: 10%;
+    margin: 0px;
+    color: white;
+    font-size: 120%;
+}
+#youtubeVideosList li
+{
+    padding: 0px;
+    margin: 0px;
+}
+#youtubeVideosList .container
+{
+    display: table;
+    width: 100%;
+    height: 100px;
+    border-spacing: 10px;
+}
+#youtubeVideosList .thumbnail
+{
+    display: table-cell;
+    width: 120px;
+    height: 100%;
+    vertical-align: middle;
+    background-color: #222;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#youtubeVideosList .titleContainer
+{
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+}
+#youtubeVideosList .actionsContainer
+{
+    display: table-cell;
+    width: 20%;
+    height: 100%;
+    vertical-align: middle;
+    padding: 0px;
+}
+#youtubeVideosList .titleContainer .title
+{
+    padding: 10px;
+}
+#youtubeVideosList .actionsContainer .action
+{
+    width: 40%;
+    height: 70%;
+    margin-left: 5%;
+    display: inline-table !important;
+    color: white;
+}
+#youtubeVideosList .actionsContainer .action:after
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    -webkit-mask-size: 80% auto;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    background: currentColor;
+    content: "";
+}
+#youtubeVideosList .actionsContainer .action.view
+{
+    background: firebrick;
+}
+#youtubeVideosList .actionsContainer .action.view:after
+{
+    -webkit-mask-image: url(../images/icons/playIcon.png);
+}
+#youtubeVideosList .actionsContainer .action.share
+{
+    background: #1E6BDE;
+}
+#youtubeVideosList .actionsContainer .action.share:after
+{
+    -webkit-mask-image: url(../images/icons/shareIcon.png);
+}
+
+#youtubePlayer > .km-scroll-container
+{
+    height: 100%;
+}
+/*============= Youtube Modal =============*/
+
+/*============= Whats New View =============*/
+#whatsNewList li
+{
+    padding: 0px;
+    border-bottom: 1px solid #AAA;
+}
+#whatsNewList .container
+{
+    display: table;
+    width: 100%;
+    height: 80px;
+    padding: 0px 2%;
+    margin: 0px;
+    font-size: 120%;
+    padding-right: 5%;
+}
+#whatsNewList .container .title
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+#whatsNewList .container .date
+{
+    display: table-cell;
+    width: 20%;
+    vertical-align: middle;
+    text-align: right;
+    margin-right: 5%;
+}
+/*============= Whats New View =============*/
+/*============= Whats New Details View =============*/
+#whatsNewDetailsView .header .title
+{
+    padding: 0px 5%;
+    padding-left: 25%;
+    font-weight: bold;
+    font-size: 150%;
+}
+#whatsNewDetailsView .header .date
+{
+    width: 20%;
+}
+#whatsNewDetailsView .message
+{
+    display: block;
+    margin: 20px;
+    font-size: 120%;
+}
+/*============= Whats New Details View =============*/
+
+/*============= Presentations View =============*/
+#presentationUnitsList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#presentationUnitsList li .container:after
+{
+    display: none;
+}
+#presentationUnitsList li .container .unitTitle
+{
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+
+#presentationsList
+{
+    overflow: hidden;
+}
+#presentationsList li
+{
+    display: block;
+    width: 32%;
+    margin: 0px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #AAA;
+    box-shadow: none;
+}
+#presentationsList li .container
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#presentationsList li .detailsContainer
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#presentationsList li .detailsContainer .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+}
+#presentationsList li .actions
+{
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: #1E8BDE;
+}
+#presentationsList li .action
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 140%;
+    background: inherit;
+}
+/*============= Presentations View =============*/
+
+/*============= Presentation Details View =============*/
+#presentationDetailsView .header
+{
+    max-height: 60px;
+}
+#presentationDetailsView .header .headerItem
+{
+    display: table-cell;
+    vertical-align: middle;
+    max-width: 25%;
+    padding: 0px 10px;
+}
+#presentationDetailsView .header .headerItem.title
+{
+    max-width: 50%;
+}
+#presentationDetailsView .header .headerItem.title .value
+{
+    max-height: 60px;
+}
+#presentationDetailsView .header #presentationProgress
+{
+    font-size: 120%;
+    font-weight: bold;
+}
+#presentationDetailsView .content
+{
+    position: relative;
+    overflow: hidden;
+}
+#presentationDetailsView .mainContentContainer
+{
+    display: block;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+}
+#presentationDetailsView .slidesThumbnailsContainer
+{
+    display: block;
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    transform: translate3d(0px, 100%, 0px);
+    -webkit-transform: translate3d(0px, 100%, 0px);
+    transition: transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
+    background: rgba(30, 139, 222, 0.7);
+}
+#presentationDetailsView .slidesThumbnailsContainer.visible
+{
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+}
+#presentationDetailsView .slidesThumbnailsContainer .menuTab
+{
+    display: block;
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    top: -40px;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    background-color: #1E8BDE;
+    background-image: url(../images/icons/menu/menu.png);
+    background-size: 40% 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    border-radius: 10px 10px 0px 0px;
+    z-index: 2;
+}
+#presentationDetailsView .mainContentContainer .mainSlidesContainer
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+}
+#presentationDetailsView .mainContentContainer .overlaySlidesContainer
+{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 0;    
+}
+#presentationDetailsView .mainContentContainer #mainSlidesScroller
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#presentationDetailsView .mainContentContainer #mainSlidesScroller .container
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#presentationDetailsView .mainContentContainer #mainSlidesScroller .slide
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#presentationDetailsView .slidesThumbnailsContainer .slidesThumbnailsScroller
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#presentationDetailsView .slidesThumbnailsContainer .slidesThumbnailsScroller .km-touch-scrollbar.km-horizontal-scrollbar
+{
+    background: white !important;
+}
+#presentationDetailsView #slidesThumbnailsList
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: none;
+    border: none;
+}
+#presentationDetailsView #slidesThumbnailsList li
+{
+    display: inline-block;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    background: none;
+    border: none;
+}
+#presentationDetailsView #slidesThumbnailsList li .container
+{
+    display: block;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    border: 1px solid black;
+    background: white;
+}
+#presentationDetailsView #slidesThumbnailsList li .container .slide
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+/*============= Presentation Details View =============*/
+
+/* ============ Exams Unit View ===============*/
+/*============= Screen Broadcast View =============*/
+#examUnitsList li .container
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#examUnitsList li .container:after
+{
+    display: none;
+}
+#examUnitsList li .container .unitTitle
+{
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+
+/* ============ Exams Unit View ===============*/
+/* ============ Exams View ===============*/
+#examsList
+{
+    overflow: hidden;
+}
+#examsList li
+{
+    display: block;
+    width: 32%;
+    margin: 0px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #AAA;
+    box-shadow: none;
+}
+#examsList li .container
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#examsList li .detailsContainer
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#examsList li .detailsContainer .image
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+    background-image:url(../images/icons/menu/examsIcon.png);
+}
+#examsList li .actions
+{
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: #1E8BDE;
+}
+#examsList li .action
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 140%;
+    background: inherit;
+}
+/*============= Exams View =============*/
+
+/*============= ExamsDetails View =============*/
+.resultContainer{
+        display: block;
+    width: 75%;
+    float: left;
+}
+.chartContainer{
+        display: block;
+    width: 25%;
+    height: 300px;
+    float: left;
+}
+#examQuestionsList {
+    width: 98%;
+    margin: 0px auto;
+    margin-bottom: 10px;
+    border-spacing: 0px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #4499fd;
+}
+#examQuestionsList tr td.questionName, #examQuestionsList tr td.questionMark, #examQuestionsList tr td.correctScore {
+    text-align: center;
+}
+#examQuestionsList tr td:not(:last-child) {
+    border-right: 1px solid #4499fd;
+}
+span[id=examTitle] {
+    color: black;
+    
+}
+navbar.customNavbar .km-view-title {
+    background: none;
+    border: none;
+    box-shadow: none;
+    height: 60px;
+    line-height: 60px;
+    text-transform: uppercase;
+}
+#examsResultsHeader {
+    border-bottom: 2px dotted #CCC !important;
+}
+#examQuestionsListHeader li {
+    padding :.5em .7em;
+    font-weight:bold;
+}
+#examsResultsHeader, #examsResultsHeader li {
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+.km-shareIcon {
+    -webkit-mask-box-image: url("../images/icons/share-white.png");
+    background-color: red;
+}
+km-navbar.customNavbar, .km-navbar.customNavbar .km-view-title {
+    background: none;
+    border: none;
+    box-shadow: none;
+    height: 60px;
+    line-height: 60px;
+    text-transform: uppercase;
+}
+#examStudentsList li{
+    display: block;
+    vertical-align: middle;
+    line-height: 1.6em;
+    font-size: 1.2em;
+    font-weight: bold;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+#examStudentsList li .studentStatus {
+    display: inline-block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#examStudentsList li .studentName {
+    display: inline-block;
+    float: left;
+    width: -webkit-calc(100% - 100px);
+    height: 40px;
+    line-height: 40px;
+    margin: 0px 10px;
+}
+#examStudentsList li .checkbox.checked {
+    background-image: url(../images/icons/checkMark.png);
+    background-position: center;
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+}
+#examStudentsList li .checkbox {
+    display: inline-block;
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+/*============= create new exam View =============*/
+.fb_q_number {
+    display: inline-block;
+    width: 5%;
+    height: 40px;
+    margin-left: 1.5%;
+    margin-top: 5%;
+    font-size: 1.2rem;
+    color: #666;
+}
+#fb_question {
+    display: inline-block;
+    width: 89%;
+    height: 40px;
+    margin: 0 auto;
+    margin-left: -4px;
+    font-size: 1.2rem;
+}
+input[type='text'], input[type='number'] {
+    border: 2px solid #CCC;
+    box-shadow: 0px 0px 1px #CCC;
+    border-radius: 5px;
+}
+.fb_q_container {
+    clear: both;
+    min-height: 60px;
+    margin-top: 20px;
+}
+.fb_q_answer_number {
+    display: inline-block;
+    width: 5%;
+    height: 40px;
+    margin-left: 5%;
+    margin-top: 2.5%;
+    font-size: 1.2rem;
+    color: #666;
+    float: left;
+}
+.inputContainer {
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    border: 1px solid #AAA;
+    border-radius: 5px;
+    float: left;
+}
+.inputContainer .inputWithImage {
+    display: block;
+    width: 82.5%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-right: 1px solid #AAA;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+}
+.inputContainer .inputImage {
+    display: block;
+    width: 17%;
+    height: 50px;
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+    background-image: url(../images/icons/menu/camera.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    border-radius: 5px;
+}
+.fb_checkbox, .fb_radio {
+    display: block;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    margin-top: 2%;
+    margin-right: 5%;
+    background-color: #AAA;
+    background-image: URL('../images/icons/checkMark-unchecked.png');
+    background-repeat: no-repeat;
+    background-position: 2px 5px;
+    background-size: 30px 30px;
+}
+.fb_checkbox.checked, .fb_radio.checked {
+    background-color: #AAA;
+    background-image: URL('../images/icons/checkMark-checked.png');
+    background-repeat: no-repeat;
+    background-position: 2px 5px;
+    background-size: 30px 30px;
+}
+#examQuestionsList tr:nth-child(even) {
+    /* background: #dfd4aa; */
+    background: #6abfe6;
+}
+#examQuestionsList tr:nth-child(odd) {
+    /* background: #dfd4aa; */
+    background: #bbe2f6;
+}
+/*============= create new exam View =============*/
+
+/*============= ExamsDetails View =============*/
+
+ 
+.checkbox, .radio
+{   
+    width: 50px;
+    height: 50px;
+    position: relative !important;
+    top: 0px !important;
+    left: 0px !important;
+}
+.checkbox:after, .radio:after
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-size: contain !important;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-image: url(../images/icons/checkIcon.png);
+    background: currentColor;
+    content: none !important;
+}
+.checkbox:checked:after, .radio:checked:after
+{
+    content: "" !important;
+}
+#questionAnswers {
+    border-spacing: 0px;
+    border: 1px solid black;
+}
+#questionAnswers tr td {
+    border: 1px solid black;
+    font-size: 1.2rem;
+    padding: 20px;
+}
+
+#studentMultiAnswerTable, #studentAnswerTable {
+    border-spacing: 0px;
+    border: 1px solid black;
+}
+#studentAnswerTable tr td, #studentMultiAnswerTable tr td {
+    border: 1px solid black;
+    font-size: 1.2rem;
+    padding: 20px;
+}
+.km-button.deleteQuestionBtn {
+    float: right;
+    margin-right: 1%;
+    background: red;
+}
+.km-button.editQuestionBtn {
+    float: right;
+    margin-right: 1%;
+}
+span.examDetailsQuestionMark {
+    float: right;
+    margin-right: 1%;
+}
+#createExamView li{
+    padding: 0.5em 0.7em;
+}
+/*-------------documents ---------------*/
+#documents-list {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+#documents-list li:not(.catHeader) {
+    display: inline-block;
+    width: 22.5%;
+    /* width: 200px; */
+    height: 300px;
+    margin: 20px 0px;
+    margin-left: 2%;
+    float: left;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: none;
+    padding: 0px;
+     background: #f0f0f0;
+}
+.progressBarContainer {
+    display: block;
+    width: 100%;
+    height: 30px;
+    background: lightblue;
+    opacity: 0;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.iconContainer {
+    display: block;
+    width: 100%;
+    height: calc(100% - 70px);
+    height: -webkit-calc(100% - 70px);
+    height: 80%;
+    background-color: white;
+    background-image: url(images/icons/pdf.png);
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.documentInfoContainer {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background: #333;
+    box-shadow: inset 0px 1px 1px #CCC;
+    color: white;
+}
+.progressBar {
+    display: block;
+    width: 0px;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    background: #666;
+    z-index: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.progressBarContainer .progressLabel {
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, -1px 1px 0px #000, 1px -1px 0px #000;
+}
+.progressBarContainer .progressLabel:after {
+    content: "%";
+}
+.km-view:not(.popover-view) .km-footer .km-navbar .km-button {
+    width: 80px;
+    height: 37px;
+    line-height: 37px;
+    background: none;
+    margin: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+    border: none;
+    padding: 0px;
+    float: right;
+    border-left: 1px solid rgb(106,106,106);
+    box-shadow: -1px 0px 1px #000;
+    font-size: 1.5rem;
+    color: #FEFEFE;
+}
+.km-view:not(.popover-view) .km-footer .km-navbar{
+	/*background: -webkit-linear-gradient(top, rgba(70,70,70,1) 65%,rgba(48,48,48,1) 100%);*/
+	background: -webkit-linear-gradient(top, #515151 0%,#505050 16%,#292929 100%);
+	box-shadow: 0px -3px 0px orange;
+    border-radius:0px;
+	/*border-bottom:3px solid rgb(45,187,202);*/
+}
+#questionTypePopover li{
+    padding:.5em .7em;
+}
+#examFillDetails li{
+    padding:.5em .7em;
+}
+.btnContainer {
+    display: block;
+    width: 40px;
+    float: right;
+    margin: 10px;
+}
+.shareDocBtn {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+.shareDocDownloadBtn {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+}
+.documentInfo {
+    font-size: 1rem;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/*------------------notes unit view-----------------------*/
+#noteUnitsList li .container {
+    display: block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #AAA;
+    padding: 0px;
+    margin: 0px;
+}
+#noteUnitsList li .container .unitTitle {
+    height: 100%;
+    font-size: 140%;
+    font-weight: bold;
+    float: left;
+    color: #333;
+    padding: 0px 10px;
+}
+#notesList li {
+    display: block;
+    width: 32%;
+    margin: 0px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #AAA;
+    box-shadow: none;
+}
+#notesList li .container {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#notesList li .detailsContainer {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+#notesList li .detailsContainer .image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+    background-image: url(../images/icons/menu/notesIcon.png);
+}
+#notesList li .actions {
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background: #1E8BDE;
+}
+#notesList li .action {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    margin: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 140%;
+    background: inherit;
+}

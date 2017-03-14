@@ -1,0 +1,323 @@
+.km-header
+{
+    background: #1E8BDE;
+    color: white;
+}
+.km-header .km-button.km-state-active
+{
+    background-color: #1466A5 !important;
+}
+
+.km-view .km-content
+{
+    background: white;
+}
+
+.km-touch-scrollbar
+{
+    background: #1E8BDE !important;
+}
+     
+.menuButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/menu.png) !important;
+}
+.backButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/backIcon.png) !important;
+}
+.homeButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/home.png) !important;
+}
+.moreButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/more.png) !important;
+}
+.alertButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/participate.png) !important;
+}
+.eyeButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/eyesOnTeacher.png) !important;
+}
+.presentStudentsButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/students.png) !important;
+}
+.saveButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/saveIcon.png) !important;
+}
+.deleteButton:before
+{
+    -webkit-mask-image: url(../images/icons/menu/deleteIcon.png) !important;
+}
+
+.disabled
+{
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+}
+.hidden
+{
+    display: none !important;
+}
+.readonly
+{
+    pointer-events: none !important;
+}
+
+.form
+{
+    display: table;
+    width: 90%;
+    margin: 5%;
+    overflow: hidden;
+}
+.formInput
+{
+    width: 100%;
+    min-height: 46px;
+    line-height: 38px;
+    margin: 15px auto;
+}
+div.formInput
+{
+    padding: 4px 10px;
+    text-align: center;
+    font-size: 180%;
+}
+.formButtons
+{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+.formButton
+{
+    width: 100%;
+    height: 50px;
+    float: left;
+}
+.formButton.delete
+{
+    background: indianred !important;
+    color: white !important;
+}
+
+/*===== VIEW STYLE =====*/
+#loginView .km-content
+{
+    background-image: url(../images/LoginScreen.png);
+    background-position: bottom center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+#loginView #loginContainer
+{
+    display: block;
+    width: 400px;
+    height: 250px;
+    background: #1E8BDE;
+    padding: 5px 0px;
+    position: relative;
+    border-radius: 10px;
+    margin-top: 7%;
+    margin-left: 10%;
+}
+#loginView #loginContainer .formButton
+{
+    background-color: #6BB1E6 !important;
+    color: white !important; margin-top: 15px;
+    font-size: 150%;
+    font-weight: bold;
+}
+#loginView #loginButton
+{
+    margin-top: 15px;
+    background-image: url(../images/icons/playIcon.png);
+    background-size: auto 70%;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+#loginView #loginContainer .formButton .small
+{
+    font-size: 90%;
+    font-weight: normal;
+}
+
+.topActions
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+}
+.topActions .action
+{
+    display: block;
+    width: auto;
+    min-width: 120px;
+    height: 40px;
+    margin: 10px 0px;
+    margin-right: 10px;
+    float: right;
+    background: #1E8BDE;
+    color: white;
+    font-size: 120%;
+    border-radius: 0px;
+    border: none;
+    box-shadow: none;
+}
+.topActions .title
+{
+    display: block;
+    width: auto;
+    min-width: 120px;
+    height: 60px;
+    margin: 0px;
+    margin-left: 10px;
+    float: left;
+    color: #333;
+    font-size: 150%;
+    font-weight: bold;
+}
+.bottomActions
+{
+    display: block;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    text-align: center;
+}
+.bottomActions .action
+{
+    display: inline-block;
+    width: auto;
+    min-width: 120px;
+    height: 40px;
+    margin: 10px auto;
+    background: #1E8BDE;
+    color: white;
+    font-size: 120%;
+    border-radius: 0px;
+    border: none;
+    box-shadow: none;
+}
+
+.km-listview li.km-state-active .km-listview-link
+{
+    background: indianred;
+    color: white !important;
+}
+.km-listview li.km-state-active .km-listview-link div,
+.km-listview li.km-state-active .km-listview-link span
+{
+    color: white !important;
+}
+
+#notification-bar
+{
+    display: none;
+    width: 50%;
+    height: 100px;
+    background: #1E8BDE;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin: 0px auto;
+    bottom: 0px;
+    transform: translate3d(0px, 100%, 0px);
+    -webkit-transform: translate3d(0px, 100%, 0px);
+    transition: transform 0.25s ease;
+    -webkit-transition: -webkit-transform 0.25s ease;
+    z-index: 99999;
+    opacity: 0.95;
+    border-radius: 10px 10px 0px 0px;
+}
+#notification-bar.visible
+{
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+}
+#notification-bar .message
+{
+    height: 100%;
+    font-size: 140%;
+    color: white;
+}
+
+#settingsButton
+{
+    display: block;
+    width: 25%;
+    height: 45%;
+    background: rgba(100, 100, 100, 0);
+    position: absolute;
+    top: 17%;
+    right: 4%;
+    border-radius: 100%;
+}
+
+#progressModal .km-content
+{
+    color: white;
+    background: #1E8BDE;
+}
+#progressModal .progressBarContainer
+{
+    display: block;
+    height: 40px;
+    width: 94%;
+    margin: 3%;
+    position: relative;
+    background: #eee;
+    border-radius: 10px;
+}
+#progressModal .progressBar
+{
+    display: block;
+    height: auto;
+    width: auto;
+    position: absolute;
+    left: 0px;
+    right: 100%;
+    margin-right: 7px;
+    margin-left: 7px;
+    top: 7px;
+    bottom: 7px;
+    /*transition: right 0.1s ease;*/
+    background: #1E8BDE;
+    border-radius: 5px;
+}
+#progressModal .progressMessage
+{
+    display: block;
+    height: 40px;
+    line-height: 30px;
+    width: 380px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+#updateAppButton {
+    display: block !important;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background: #1E8BDE;
+    color: white;
+    margin: 10px;
+    font-size: 120%;
+    border-radius: 100%;
+    overflow: hidden;
+}
+#updateAppButton .km-text {
+    display: block !important;
+    width: 100%;
+    text-align: center;
+}
